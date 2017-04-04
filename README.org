@@ -1,0 +1,43 @@
+* expert-lamp
+
+** How to use Git in NetBeans:
+
+[[https://netbeans.org/kb/docs/ide/git.html][Instructions in more detail]]
+
+*** Cloning The Repository
+
+From the menubar, select =Team > Git > Clone=.
+
+The Git repository location is =https://github.com/SummerJacket/expert-lamp.git=. Enter your username and password and click =Next=. 
+
+Select the remote branch =master= and click =Next=.
+
+Don't touch anything here. Click =Finish=.
+
+After the project is cloned, click =Open Project=.
+
+*** Adding Changed Files
+
+To choose which files to add, right click the file you want to add and select =Git > Add=
+
+To add all changed files, right click the project in the sidebar and select =Git > Commit=
+
+Write a commit message, change the Author and Commiter to your name. Click =Commit=.
+
+*** Pushing
+
+From the menubar, select =Team > Remote > Push=.
+
+Select the appropriate Git repository and click =Next=.
+
+Select =master -> master= and click =Next=.
+
+Select =master -> origin/master= and click =Finish=.
+
+*** Pulling
+
+From the menubar, select =Team > Remote > Push=.
+
+Select the appropriate Git repository and click =Next=.
+
+Select =master -> origin/master= and click =Finish=.
