@@ -36,7 +36,7 @@ Select =master -> origin/master= and click =Finish=.
 
 *** Pulling
 
-From the menubar, select =Team > Remote > Push=.
+From the menubar, select =Team > Remote > Pull=.
 
 Select the appropriate Git repository and click =Next=.
 
