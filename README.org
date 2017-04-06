@@ -2,7 +2,9 @@
 
 ** How to use Git in NetBeans:
 
+#+BEGIN_QUOTE
 [[https://netbeans.org/kb/docs/ide/git.html][Instructions in more detail]]
+#+END_QUOTE
 
 *** Cloning The Repository
 
