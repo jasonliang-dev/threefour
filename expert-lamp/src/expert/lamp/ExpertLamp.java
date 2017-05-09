@@ -5,6 +5,8 @@
  */
 package expert.lamp;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author jason
@@ -15,7 +17,7 @@ public class ExpertLamp {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
-		Object[][][][] data = new Object[9][9][9][9];
+            
 	}
 	
 }
