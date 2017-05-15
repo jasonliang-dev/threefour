@@ -1,11 +1,12 @@
 package expertlamp;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class UsersData {
     ArrayList<Player> players = new ArrayList();
     ArrayList<String> usedNames = new ArrayList();
-    Player curPlayer;
     
     public void addUser(String name) {
         if (nameUsed(name))
@@ -38,16 +39,38 @@ public class UsersData {
                 }
             }
             
-            return curPlayer = players.get(playerIndex);
+            return players.get(playerIndex);
         } else {
             System.out.println("USER NOT FOUND");
             return null;
         }
     }
     
-    public void removeUser(String name) {
+    /**
+     * 
+     * @return 
+     * Returns a sorted list of players if the players ArrayList is valid
+     * Will return null if the players ArrayList is empty or invalid
+     */
+    public ArrayList sortUsers() {
+        ArrayList<Player> temp = new ArrayList();
+        if (players.size() > 0) {
+            for (Player p : players) {
+                temp.add(p);
+            }
+            Collections.sort(temp);
+            return temp;
+        } else {
+            System.out.println("No users available");
+            return null;
+        }
         
-    }
+        
+    } 
+    
+    /*public void removeUser(String name) {
+        
+    }*/
     
     /**
      * 

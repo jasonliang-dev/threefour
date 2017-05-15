@@ -27,6 +27,16 @@ public class dataTesting {
         System.out.println(curPlayer.getAvg());
         System.out.println("Cur: "+curPlayer.avg + " Other: "+otherPlayer.avg);
         System.out.println(curPlayer.compareTo(otherPlayer));
+        
+        ArrayList<Double> test = curPlayer.sortUserTime();
+        
+        for(Double d : curPlayer.reactionTimes)
+            System.out.println(d);
+        
+        System.out.println("*****************************");
+        
+        for(Double d : test )
+            System.out.println(d);
     }
 	
 }

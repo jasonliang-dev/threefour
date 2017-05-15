@@ -1,6 +1,8 @@
 package expertlamp;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 
 public class Player implements Comparable<Player> {
     String name;
@@ -49,6 +51,24 @@ public class Player implements Comparable<Player> {
             
             avg = sum / numOfItems;
         }
+    }
+    
+    /**
+     * 
+     * @return 
+     * If reactionTimes ArrayList is filled, will return a sorted List in descending order
+     */
+    public ArrayList sortUserTime() {
+        ArrayList temp = new ArrayList();
+        
+        if (reactionTimes.size() > 0) {
+            for (Double d : reactionTimes)
+                temp.add(d);
+            
+            Collections.sort(temp);
+            return temp;
+        } else
+            return null;
     }
     
     /**
