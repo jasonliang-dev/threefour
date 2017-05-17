@@ -30,6 +30,7 @@ public class dataTesting {
         
         ArrayList<Double> test = curPlayer.sortUserTime();
         
+        /*
         for(Double d : curPlayer.reactionTimes)
             System.out.println(d);
         
@@ -37,6 +38,16 @@ public class dataTesting {
         
         for(Double d : test )
             System.out.println(d);
+       */
+        
+        for(Player p : allData.players) 
+            System.out.println(p.getName());
+        
+        System.out.println("*****************************");
+        allData.removeUser("Bob");
+        for(Player p : allData.players) 
+            System.out.println(p.getName());
+        
     }
 	
 }

@@ -7,9 +7,12 @@ import java.util.List;
 public class UsersData {
     ArrayList<Player> players = new ArrayList();
     ArrayList<String> usedNames = new ArrayList();
+    int maxName = 30;
     
     public void addUser(String name) {
-        if (nameUsed(name))
+        if (name.length() > maxName)
+            System.out.println("Name is too long");
+        else if (nameUsed(name))
             System.out.println("Name is already used. Please enter a different name."); // Integrate error messages into jFrame
         else {
             usedNames.add(name);
@@ -18,7 +21,9 @@ public class UsersData {
     }
     
     public void addUser(String name, ArrayList<Double> reactionTime) {
-        if (nameUsed(name))
+        if (name.length() > maxName) 
+            System.out.println("Name is too long");
+        else if (nameUsed(name))
             System.out.println("Name is already used. Please enter a different name."); // Integrate error messages into jFrame
         else {
             usedNames.add(name);
@@ -68,9 +73,25 @@ public class UsersData {
         
     } 
     
-    /*public void removeUser(String name) {
+    /**
+     * 
+     * @param name A name that is associated with a player stored in the game
+     */
+    public void removeUser(String name) {
+        usedNames.remove(name);
+        int playerIndex = -1;
         
-    }*/
+        for (int i = 0; i < players.size(); i++) {
+            Player p = players.get(i);
+
+            if ( (p.getName()).equals(name)) {
+                playerIndex = i;
+                break;
+            }
+        }
+        
+        players.remove(playerIndex);
+    }
     
     /**
      * 
