@@ -13,7 +13,9 @@ public class ExpertLamp {
 
 		try {
 			motejDemo.discoverRemote(wiimotes);
-			motejDemo.accelerometerDemo(wiimotes.get(0));
+			Mote P1 = wiimotes.get(0);
+			motejDemo.buttonDemo(P1);
+			motejDemo.accelerometerDemo(P1);
 		} catch (InterruptedException ex) {
 			Logger.getLogger(ExpertLamp.class.getName()).log(Level.SEVERE, null, ex);
 		}

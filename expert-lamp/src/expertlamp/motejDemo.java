@@ -6,10 +6,12 @@ import motej.MoteFinder;
 import motej.MoteFinderListener;
 import motej.event.AccelerometerEvent;
 import motej.event.AccelerometerListener;
+import motej.event.CoreButtonEvent;
+import motej.event.CoreButtonListener;
 import motej.request.ReportModeRequest;
 
 public class motejDemo {
-
+	
 	public static void discoverRemote(ArrayList motes) throws InterruptedException {
 		MoteFinderListener listener = new MoteFinderListener() {
 			
@@ -29,12 +31,28 @@ public class motejDemo {
 		Thread.sleep(30000l);
 		finder.stopDiscovery();
 	}
+
+	public static void buttonDemo(Mote mote) {
+		mote.addCoreButtonListener(new CoreButtonListener() {
+			
+			@Override
+			public void buttonPressed(CoreButtonEvent evt) {
+				if (evt.isButtonAPressed()) System.out.println("Button A pressed!");
+				if (evt.isButtonBPressed()) System.out.println("Button B pressed!");
+				if (evt.isNoButtonPressed()) System.out.println("No button pressed.");
+			}
+			
+		});
+	}
 	
 	public static void accelerometerDemo(Mote mote) throws InterruptedException {
 		AccelerometerListener listener = new AccelerometerListener() {
 			
 			public void accelerometerChanged(AccelerometerEvent evt) {
-				System.out.println(evt.getX() + " : " + evt.getY() + " : " + evt.getZ());
+				String x = Integer.toHexString(evt.getX());
+				String y = Integer.toHexString(evt.getY());
+				String z = Integer.toHexString(evt.getZ());
+				System.out.println(x + " : " + y + " : " + z);
 			}
 			
 		};
@@ -42,9 +60,10 @@ public class motejDemo {
 		mote.addAccelerometerListener(listener);
 		mote.setReportMode(ReportModeRequest.DATA_REPORT_0x31);
 		
-		Thread.sleep(60000l);
+		Thread.sleep(30000l);
 		
 		mote.setReportMode(ReportModeRequest.DATA_REPORT_0x30);
 		mote.disconnect();
-	}	
+	}
+	
 }
