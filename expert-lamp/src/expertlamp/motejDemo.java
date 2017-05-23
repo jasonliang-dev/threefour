@@ -31,7 +31,7 @@ public class motejDemo {
 		Thread.sleep(30000l);
 		finder.stopDiscovery();
 	}
-
+	
 	public static void buttonDemo(Mote mote) {
 		mote.addCoreButtonListener(new CoreButtonListener() {
 			

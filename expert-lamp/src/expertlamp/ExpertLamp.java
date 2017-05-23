@@ -8,9 +8,9 @@ import motej.Mote;
 public class ExpertLamp {
 	
 	public static void main(String[] args) {
-
+		
 		ArrayList<Mote> wiimotes = new ArrayList<>();
-
+		
 		try {
 			motejDemo.discoverRemote(wiimotes);
 			Mote P1 = wiimotes.get(0);
@@ -19,7 +19,7 @@ public class ExpertLamp {
 		} catch (InterruptedException ex) {
 			Logger.getLogger(ExpertLamp.class.getName()).log(Level.SEVERE, null, ex);
 		}
-
+		
 	}
 	
 	public static void what() throws InterruptedException {
