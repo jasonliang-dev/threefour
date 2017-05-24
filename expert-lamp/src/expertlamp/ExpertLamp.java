@@ -1,21 +1,14 @@
 package expertlamp;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import motej.Mote;
+import motej.MoteFinder;
+import motej.MoteFinderListener;
 
 public class ExpertLamp {
 	
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) {
 		
-		ArrayList<Mote> wiimotes = new ArrayList<>();
-
-		Wiimote P1 = new Wiimote();
-		P1.discoverRemote();
-		
-		//mote.setReportMode(ReportModeRequest.DATA_REPORT_0x30);
-		//mote.disconnect();
 	}
 
 	public static void demo(ArrayList<Mote> motes) throws InterruptedException {

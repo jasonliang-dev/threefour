@@ -1,8 +1,6 @@
 package expertlamp;
-import java.util.ArrayList;
+
 import motej.Mote;
-import motej.MoteFinder;
-import motej.MoteFinderListener;
 import motej.event.AccelerometerEvent;
 import motej.event.AccelerometerListener;
 import motej.event.CoreButtonEvent;
@@ -11,55 +9,15 @@ import motej.request.ReportModeRequest;
 
 public class Wiimote {
 
+	public Mote mote = null;
+
 	private int axisX  = 130;
 	private int axisY  = 131;
 	private int axisZ  = 152;
-	Mote address = null;
-	String button = "none";
+	private String button = "none";
 
-	public int getAxisX() {
-		return axisX;
-	}
-
-	public int getAxisY() {
-		return axisY;
-	}
-
-	public int getAxisZ() {
-		return axisZ;
-	}
-	
-	public void discoverRemote() throws InterruptedException {
-		MoteFinderListener listener = new MoteFinderListener() {
-			
-			@Override
-			public void moteFound(Mote mote) {
-				address = new Mote(mote.getBluetoothAddress());
-				mote.rumble(2000l);
-			}
-			
-		};
-		
-		MoteFinder finder = MoteFinder.getMoteFinder();
-		finder.addMoteFinderListener(listener);
-		
-		finder.startDiscovery();
-		Thread.sleep(15000l);
-		finder.stopDiscovery();
-	}
-	
-	public void buttonInput() {
-		address.addCoreButtonListener(new CoreButtonListener() {
-			
-			@Override
-			public void buttonPressed(CoreButtonEvent evt) {
-				if (evt.isButtonAPressed() && evt.isButtonBPressed()) button = "AB";
-				else if (evt.isButtonAPressed()) button = "A";
-				else if (evt.isButtonBPressed()) button = "B";
-				else if (evt.isNoButtonPressed()) button = "none";
-			}
-			
-		});
+	public Wiimote(Mote m) {
+		mote = m;
 	}
 	
 	public void accelerationInput() throws InterruptedException {
@@ -73,11 +31,40 @@ public class Wiimote {
 			
 		};
 		
-		address.addAccelerometerListener(listener);
-		address.setReportMode(ReportModeRequest.DATA_REPORT_0x31);
-		
-		Thread.sleep(30000l);
-		
+		mote.addAccelerometerListener(listener);
+		mote.setReportMode(ReportModeRequest.DATA_REPORT_0x31);
+	}
+
+	public void buttonInput() {
+		CoreButtonListener listener = new CoreButtonListener() {
+			
+			@Override
+			public void buttonPressed(CoreButtonEvent evt) {
+				if (evt.isButtonAPressed() && evt.isButtonBPressed()) button = "AB";
+				else if (evt.isButtonAPressed()) button = "A";
+				else if (evt.isButtonBPressed()) button = "B";
+				else if (evt.isNoButtonPressed()) button = "none";
+			}
+			
+		};
+
+		mote.addCoreButtonListener(listener);
 	}
 	
+	public int getAxisX() {
+		return axisX;
+	}
+
+	public int getAxisY() {
+		return axisY;
+	}
+
+	public int getAxisZ() {
+		return axisZ;
+	}
+
+	public String getButton() {
+		return button;
+	}
+
 }
