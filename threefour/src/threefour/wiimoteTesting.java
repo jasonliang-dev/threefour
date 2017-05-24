@@ -1,4 +1,4 @@
-package expertlamp;
+package threefour;
 
 import java.util.ArrayList;
 import motej.Mote;
@@ -102,17 +102,19 @@ public class wiimoteTesting extends javax.swing.JFrame {
 
         private void disconnectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disconnectButtonActionPerformed
 		for (Mote m : motes) {
-			m.rumble(1000l);
 			m.disconnect();
 		}
         }//GEN-LAST:event_disconnectButtonActionPerformed
 
 	public static MoteFinderListener FinderListener() {
 		MoteFinderListener listener = new MoteFinderListener() {
+
+			boolean[] pl = {true, false, false, false};
 			
 			@Override
 			public void moteFound(Mote mote) {
-				mote.rumble(2000l);
+				mote.rumble(1000l);
+				mote.setPlayerLeds(pl);
 				motes.add(mote);
 			}
 			

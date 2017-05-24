@@ -1,4 +1,4 @@
-package expertlamp;
+package threefour;
 
 import motej.Mote;
 import motej.event.AccelerometerEvent;
