@@ -8,7 +8,7 @@
 
 From the menubar, select =Team > Git > Clone=.
 
-The Git repository location is =https://github.com/SummerJacket/expert-lamp.git=. Enter your username and password and click =Next=. 
+The Git repository location is =https://github.com/SummerJacket/threefour.git=. Enter your username and password and click =Next=. 
 
 Select the remote branch =master= and click =Next=.
 
