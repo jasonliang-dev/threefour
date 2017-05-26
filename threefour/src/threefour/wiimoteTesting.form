@@ -26,14 +26,18 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="runButton" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="discoverButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="disconnectButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="discoverButton2" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="runButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="input1button" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="axisLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="disconnectButton" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="214" max="32767" attributes="0"/>
+              <EmptySpace pref="130" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -45,9 +49,17 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="discoverButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="disconnectButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="discoverButton2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="225" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="disconnectButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="input1button" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="axisLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="buttonLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="109" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -64,7 +76,7 @@
     </Component>
     <Component class="javax.swing.JToggleButton" name="discoverButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Discover"/>
+        <Property name="text" type="java.lang.String" value="Toggle Discovery"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
@@ -77,6 +89,34 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="runButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JToggleButton" name="input1button">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Player 1 Input"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="input1buttonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="axisLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0,0,0"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="buttonLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="none"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JToggleButton" name="discoverButton2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Toggle Discovery 2"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="discoverButton2ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

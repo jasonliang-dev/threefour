@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Jason/Documents/NetBeansProjects/threefour/expert-lamp/src/expertlamp/motejDemo.java</file>
-            <file>file:/C:/Users/Jason/Documents/NetBeansProjects/threefour/expert-lamp/src/expertlamp/ExpertLamp.java</file>
-            <file>file:/C:/Users/Jason/Documents/NetBeansProjects/threefour/expert-lamp/src/expertlamp/UsersData.java</file>
-            <file>file:/C:/Users/Jason/Documents/NetBeansProjects/threefour/expert-lamp/src/expertlamp/Wiimote.java</file>
-            <file>file:/C:/Users/Jason/Documents/NetBeansProjects/threefour/expert-lamp/src/expertlamp/wiimoteTesting.java</file>
+            <file>file:/home/jason/NetBeansProjects/threefour/threefour/src/threefour/wiimoteTesting.java</file>
+            <file>file:/home/jason/NetBeansProjects/threefour/threefour/src/threefour/motejDemo.java</file>
+            <file>file:/home/jason/NetBeansProjects/threefour/threefour/src/threefour/Wiimote.java</file>
         </group>
     </open-files>
 </project-private>
