@@ -9,35 +9,27 @@ import motej.request.ReportModeRequest;
 
 public class Wiimote {
 
-	public Mote mote = null;
+	private final Mote mote;
 
-	private int axisX  = 130;
-	private int axisY  = 131;
-	private int axisZ  = 152;
+	private final AccelerometerListener accelListener;
+	private final CoreButtonListener buttonListener;
+
+	private int[] axis = {130, 131, 152};
 	private String button = "none";
 
-	public Wiimote(Mote m) {
-		mote = m;
-	}
-	
-	public void accelerationInput() throws InterruptedException {
-		AccelerometerListener listener = new AccelerometerListener() {
-			
-			public void accelerometerChanged(AccelerometerEvent evt) {
-				axisX = evt.getX();
-				axisY = evt.getY();
-				axisZ = evt.getZ();
-			}
-			
-		};
-		
-		mote.addAccelerometerListener(listener);
-		mote.setReportMode(ReportModeRequest.DATA_REPORT_0x31);
-	}
+	public Wiimote(Mote mote) {
+		this.mote = mote;
+		this.accelListener = new AccelerometerListener() {
 
-	public void buttonInput() {
-		CoreButtonListener listener = new CoreButtonListener() {
-			
+			@Override
+			public void accelerometerChanged(AccelerometerEvent evt) {
+				axis[0] = evt.getX();
+				axis[1] = evt.getY();
+				axis[2] = evt.getZ();
+			}
+		};
+		this.buttonListener = new CoreButtonListener() {
+
 			@Override
 			public void buttonPressed(CoreButtonEvent evt) {
 				if (evt.isButtonAPressed() && evt.isButtonBPressed()) button = "AB";
@@ -45,26 +37,49 @@ public class Wiimote {
 				else if (evt.isButtonBPressed()) button = "B";
 				else if (evt.isNoButtonPressed()) button = "none";
 			}
-			
 		};
+	}
+	
+	public void addButtonListener() {
+		mote.addCoreButtonListener(buttonListener);
+	}
 
-		mote.addCoreButtonListener(listener);
+	public void addAccelListener() {
+		mote.addAccelerometerListener(accelListener);
+		mote.setReportMode(ReportModeRequest.DATA_REPORT_0x31);
+	}
+
+	public void removeButtonListener() {
+		mote.removeCoreButtonListener(buttonListener);
+	}
+
+	public void removeAccelListener() {
+		mote.setReportMode(ReportModeRequest.DATA_REPORT_0x30);
+		mote.removeAccelerometerListener(accelListener);
 	}
 	
 	public int getAxisX() {
-		return axisX;
+		return axis[0];
 	}
 
 	public int getAxisY() {
-		return axisY;
+		return axis[1];
 	}
 
 	public int getAxisZ() {
-		return axisZ;
+		return axis[2];
 	}
 
 	public String getButton() {
 		return button;
 	}
 
+	public Mote getMote() {
+		return mote;
+	}
+
+	@Override
+	public String toString() {
+		return mote.toString();
+	}
 }
