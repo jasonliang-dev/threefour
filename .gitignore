@@ -10,9 +10,10 @@
 *.war
 *.ear
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-/expert-lamp/nbproject/private/
-/expert-lamp/build/
-/threefour/nbproject/private/
-/threefour/build/
+threefour/nbproject/private/
+threefour/build/
+threefour/nbbuild/
+threefour/dist/
+threefour/nbdist/
+threefour/nbactions.xml
+threefour/nb-configuration.xml
