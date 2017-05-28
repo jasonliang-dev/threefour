@@ -9,7 +9,9 @@ public class UsersData {
     ArrayList<String> usedNames = new ArrayList();
     int maxName = 30;
     
-    public void addUser(String name) {
+    public boolean addUser(String name) {
+        boolean success = false;
+        
         if (name.length() > maxName)
             System.out.println("Name is too long");
         else if (nameUsed(name) > -1)
@@ -17,10 +19,15 @@ public class UsersData {
         else {
             usedNames.add(name);
             players.add(new Player(name));
+            success = true;
         }
+        
+        return success;
     }
     
-    public void addUser(String name, ArrayList<Double> reactionTime) {
+    public boolean addUser(String name, ArrayList<Double> reactionTime) {
+        boolean success = false;
+        
         if (name.length() > maxName) 
             System.out.println("Name is too long");
         else if (nameUsed(name) > -1)
@@ -28,7 +35,10 @@ public class UsersData {
         else {
             usedNames.add(name);
             players.add(new Player(name, reactionTime));
+            success = true;
         }
+        
+        return success;
     }
     
     public Player setCurrentUser(String name) {
@@ -48,20 +58,19 @@ public class UsersData {
      * Returns a sorted list of players if the players ArrayList is valid
      * Will return null if the players ArrayList is empty or invalid
      */
-    public ArrayList sortUsers() {
+    public ArrayList<Player> sortUsers() {
         ArrayList<Player> temp = new ArrayList();
         if (players.size() > 0) {
             for (Player p : players) {
-                temp.add(p);
+                if (p.getAvg() > 0)
+                    temp.add(p);
             }
             Collections.sort(temp);
             return temp;
         } else {
             System.out.println("No users available");
             return null;
-        }
-        
-        
+        } 
     } 
     
     /**

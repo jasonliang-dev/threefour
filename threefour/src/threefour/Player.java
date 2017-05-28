@@ -53,6 +53,17 @@ public class Player implements Comparable<Player> {
         }
     }
     
+    public ArrayList<Double> sortTimes() {
+        ArrayList<Double> temp = new ArrayList();
+        
+        for(Double t : reactionTimes) {
+            temp.add(t);
+        }
+        
+        Collections.sort(temp);
+        return temp;
+    }
+    
     /**
      * 
      * @return 
