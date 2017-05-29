@@ -40,6 +40,10 @@ public class gameFrame extends javax.swing.JFrame {
         curPlayerButton = new javax.swing.JButton();
         curNameText = new javax.swing.JTextField();
         curPlayerTimeList = new java.awt.List();
+        removeButton = new javax.swing.JButton();
+        resetButton = new javax.swing.JButton();
+        timeText = new javax.swing.JTextField();
+        addTimeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,6 +68,7 @@ public class gameFrame extends javax.swing.JFrame {
         });
 
         selectText.setEditable(false);
+        selectText.setText("Select from 1st List");
 
         curPlayerButton.setText("Set Player");
         curPlayerButton.addActionListener(new java.awt.event.ActionListener() {
@@ -73,6 +78,29 @@ public class gameFrame extends javax.swing.JFrame {
         });
 
         curNameText.setEditable(false);
+
+        removeButton.setText("Remove Player");
+        removeButton.setEnabled(false);
+        removeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeButtonActionPerformed(evt);
+            }
+        });
+
+        resetButton.setText("Reset Times");
+        resetButton.setEnabled(false);
+        resetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetButtonActionPerformed(evt);
+            }
+        });
+
+        addTimeButton.setText("Add Time");
+        addTimeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addTimeButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,11 +115,22 @@ public class gameFrame extends javax.swing.JFrame {
                         .addGap(31, 31, 31)
                         .addComponent(pNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(curNameText, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-                            .addComponent(selectText))
-                        .addGap(21, 21, 21)
-                        .addComponent(curPlayerButton)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(timeText, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(curNameText, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(selectText, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(curPlayerButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(removeButton)
+                                    .addComponent(resetButton)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(addTimeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(allNamesList, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -110,20 +149,29 @@ public class gameFrame extends javax.swing.JFrame {
                     .addComponent(curPlayerTimeList, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(avgTimeList, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
-                        .addComponent(namesList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(dataButton)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(pNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(addPlayerButton))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(selectText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(curPlayerButton))
-                            .addGap(18, 18, 18)
-                            .addComponent(curNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(allNamesList, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(namesList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(allNamesList, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(removeButton)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(dataButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(pNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(addPlayerButton))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(selectText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(curPlayerButton))
+                                .addGap(18, 18, 18)
+                                .addComponent(curNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(resetButton)
+                        .addGap(13, 13, 13)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(timeText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addTimeButton))))
                 .addContainerGap(106, Short.MAX_VALUE))
         );
 
@@ -131,25 +179,27 @@ public class gameFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void updateLists() {
-        ArrayList<Player> temp = gameData.sortUsers();
-        
         namesList.removeAll();
         avgTimeList.removeAll();
         allNamesList.removeAll();
         curPlayerTimeList.removeAll();
         
-        for (Player p : temp) {
-            namesList.add(p.getName());
-            avgTimeList.add(String.valueOf((double)Math.round(p.getAvg() * 1000) / 1000));
-        }
-        
-        for (String n : gameData.usedNames) {
-            allNamesList.add(n);
-        }
-        
-        if (curPlayer != null) {
-            for (Double t : curPlayer.sortTimes()) {
-                curPlayerTimeList.add(String.valueOf(t));
+        if (gameData.players.size() > 0) {
+            ArrayList<Player> temp = gameData.sortUsers();
+
+            for (Player p : temp) {
+                namesList.add(p.getName());
+                avgTimeList.add(String.valueOf((double)Math.round(p.getAvg() * 1000) / 1000));
+            }
+
+            for (String n : gameData.usedNames) {
+                allNamesList.add(n);
+            }
+
+            if (curPlayer != null) {
+                for (Double t : curPlayer.sortTimes()) {
+                    curPlayerTimeList.add(String.valueOf(t));
+                }
             }
         }
     }
@@ -196,9 +246,28 @@ public class gameFrame extends javax.swing.JFrame {
             selectText.setText("Invalid player selected.");
         else {
             curNameText.setText(curPlayer.getName());
+            removeButton.setEnabled(true);
+            resetButton.setEnabled(true);
             updateLists();
         }
     }//GEN-LAST:event_curPlayerButtonActionPerformed
+
+    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
+        gameData.removeUser(curPlayer.getName());
+        curPlayer = null;
+        updateLists();
+        removeButton.setEnabled(false);
+    }//GEN-LAST:event_removeButtonActionPerformed
+
+    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
+        curPlayer.clearTimes();
+        updateLists();
+    }//GEN-LAST:event_resetButtonActionPerformed
+
+    private void addTimeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTimeButtonActionPerformed
+        curPlayer.addTime(Double.parseDouble(timeText.getText()));
+        updateLists();
+    }//GEN-LAST:event_addTimeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,6 +306,7 @@ public class gameFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addPlayerButton;
+    private javax.swing.JButton addTimeButton;
     private java.awt.List allNamesList;
     private java.awt.List avgTimeList;
     private javax.swing.JTextField curNameText;
@@ -245,6 +315,9 @@ public class gameFrame extends javax.swing.JFrame {
     private javax.swing.JButton dataButton;
     private java.awt.List namesList;
     private javax.swing.JTextField pNameText;
+    private javax.swing.JButton removeButton;
+    private javax.swing.JButton resetButton;
     private javax.swing.JTextField selectText;
+    private javax.swing.JTextField timeText;
     // End of variables declaration//GEN-END:variables
 }

@@ -80,8 +80,6 @@ public class UsersData {
     public void removeUser(String name) {
         int playerIndex = findPlayer(name);
         
-        
-        
         if (playerIndex != -1) {
             players.remove(playerIndex);
             usedNames.remove(name);
@@ -116,5 +114,19 @@ public class UsersData {
         }
         
         return playerIndex;
+    }
+    
+    /**
+     * 
+     */
+    public void importData() {
+        
+    }
+    
+    /**
+     * 
+     */
+    public void exportData() {
+        
     }
 }

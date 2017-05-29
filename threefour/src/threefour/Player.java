@@ -8,13 +8,8 @@ public class Player implements Comparable<Player> {
     String name;
     double avg = 0;
     ArrayList<Double> reactionTimes = new ArrayList();
-    
-    Player() {
-        name = "PLEASE ENTER A NAME";
-        reactionTimes = new ArrayList();
-    }
  
-    Player (String name) {
+    Player(String name) {
         this.name = name;
         reactionTimes = new ArrayList();
     }
@@ -35,6 +30,13 @@ public class Player implements Comparable<Player> {
         this.name = name;
     }
     
+    public void addTime(Double time) {
+        if(time > -1) {
+            reactionTimes.add(time);
+            findAvg();
+        }
+    }
+    
     public double getAvg() {
         return avg;
     }
@@ -50,7 +52,14 @@ public class Player implements Comparable<Player> {
             }
             
             avg = sum / numOfItems;
+        } else {
+            avg = 0;
         }
+    }
+    
+    public void clearTimes() {
+        reactionTimes.clear();
+        findAvg();
     }
     
     public ArrayList<Double> sortTimes() {
