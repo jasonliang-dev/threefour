@@ -7,6 +7,8 @@ import java.util.List;
 public class UsersData {
     ArrayList<Player> players = new ArrayList();
     ArrayList<String> usedNames = new ArrayList();
+    ArrayList<Player> selectedPlayers = new ArrayList();
+    Player curPlayer; //Represents current player playing
     int maxName = 30;
     
     public boolean addUser(String name) {
@@ -25,7 +27,7 @@ public class UsersData {
         return success;
     }
     
-    public boolean addUser(String name, ArrayList<Double> reactionTime) {
+    public boolean addUser(String name, ArrayList<Integer> reactionTime) {
         boolean success = false;
         
         if (name.length() > maxName) 
@@ -41,6 +43,30 @@ public class UsersData {
         return success;
     }
     
+    public void setCurUser(String name) {
+        if (nameUsed(name) > -1) {
+            int playerIndex = findPlayer(name);
+            boolean alreadyChosen = false;
+            
+            Player temp = players.get(playerIndex);
+            
+            if (selectedPlayers.size() > 0) {
+                for(Player p : selectedPlayers) {
+                    if (temp==p)
+                        alreadyChosen = true;
+                }
+                
+                if (alreadyChosen != true) {
+                    selectedPlayers.add(temp);
+                }
+            } else {
+                selectedPlayers.add(temp);
+                curPlayer = selectedPlayers.get(0);
+            }
+        }
+    }
+    
+    //Remove after implementing ArrayList of CurrentUsers
     public Player setCurrentUser(String name) {
         if (nameUsed(name) > -1) {
             int playerIndex = findPlayer(name);
@@ -114,6 +140,17 @@ public class UsersData {
         }
         
         return playerIndex;
+    }
+    
+    public boolean nextPlayer() {
+        int curIndex = selectedPlayers.indexOf(curPlayer);
+        
+        if (curIndex < selectedPlayers.size() - 1) {
+            curPlayer = selectedPlayers.get(curIndex+1);
+            return true;
+        } else {
+            return false;
+        }
     }
     
     /**

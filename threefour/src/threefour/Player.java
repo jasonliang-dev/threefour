@@ -7,14 +7,14 @@ import java.util.Collections;
 public class Player implements Comparable<Player> {
     String name;
     double avg = 0;
-    ArrayList<Double> reactionTimes = new ArrayList();
+    ArrayList<Integer> reactionTimes = new ArrayList();
  
     Player(String name) {
         this.name = name;
         reactionTimes = new ArrayList();
     }
     
-    Player(String name, ArrayList<Double> reactionTimes) {
+    Player(String name, ArrayList<Integer> reactionTimes) {
         if (reactionTimes.size() > 0) {
             this.name = name;
             this.reactionTimes = reactionTimes;
@@ -30,7 +30,7 @@ public class Player implements Comparable<Player> {
         this.name = name;
     }
     
-    public void addTime(Double time) {
+    public void addTime(Integer time) {
         if(time > -1) {
             reactionTimes.add(time);
             findAvg();
@@ -47,7 +47,7 @@ public class Player implements Comparable<Player> {
         if (numOfItems > 0) {
             double sum = 0;
             
-            for (Double i : reactionTimes) {
+            for (Integer i : reactionTimes) {
                 sum += i;
             }
             
@@ -62,10 +62,10 @@ public class Player implements Comparable<Player> {
         findAvg();
     }
     
-    public ArrayList<Double> sortTimes() {
-        ArrayList<Double> temp = new ArrayList();
+    public ArrayList<Integer> sortTimes() {
+        ArrayList<Integer> temp = new ArrayList();
         
-        for(Double t : reactionTimes) {
+        for(Integer t : reactionTimes) {
             temp.add(t);
         }
         
@@ -82,7 +82,7 @@ public class Player implements Comparable<Player> {
         ArrayList temp = new ArrayList();
         
         if (reactionTimes.size() > 0) {
-            for (Double d : reactionTimes)
+            for (Integer d : reactionTimes)
                 temp.add(d);
             
             Collections.sort(temp);
