@@ -14,21 +14,21 @@ public class Wiimote {
 	private final AccelerometerListener accelListener;
 	private final CoreButtonListener buttonListener;
 
-	private int[] axis = {130, 131, 152};
+	private int[] motion = {130, 131, 152};
 	private String button = "none";
 
 	public Wiimote(Mote mote) {
 		this.mote = mote;
-		this.accelListener = new AccelerometerListener() {
+		accelListener = new AccelerometerListener() {
 
 			@Override
 			public void accelerometerChanged(AccelerometerEvent evt) {
-				axis[0] = evt.getX();
-				axis[1] = evt.getY();
-				axis[2] = evt.getZ();
+				motion[0] = evt.getX();
+				motion[1] = evt.getY();
+				motion[2] = evt.getZ();
 			}
 		};
-		this.buttonListener = new CoreButtonListener() {
+		buttonListener = new CoreButtonListener() {
 
 			@Override
 			public void buttonPressed(CoreButtonEvent evt) {
@@ -38,36 +38,13 @@ public class Wiimote {
 				else if (evt.isNoButtonPressed()) button = "none";
 			}
 		};
-	}
-	
-	public void addButtonListener() {
-		mote.addCoreButtonListener(buttonListener);
-	}
-
-	public void addAccelListener() {
 		mote.addAccelerometerListener(accelListener);
 		mote.setReportMode(ReportModeRequest.DATA_REPORT_0x31);
-	}
-
-	public void removeButtonListener() {
-		mote.removeCoreButtonListener(buttonListener);
-	}
-
-	public void removeAccelListener() {
-		mote.setReportMode(ReportModeRequest.DATA_REPORT_0x30);
-		mote.removeAccelerometerListener(accelListener);
+		mote.addCoreButtonListener(buttonListener);
 	}
 	
-	public int getAxisX() {
-		return axis[0];
-	}
-
-	public int getAxisY() {
-		return axis[1];
-	}
-
-	public int getAxisZ() {
-		return axis[2];
+	public int[] getMotion() {
+		return motion;
 	}
 
 	public String getButton() {
