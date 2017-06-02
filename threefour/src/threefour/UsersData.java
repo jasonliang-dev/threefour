@@ -149,6 +149,7 @@ public class UsersData {
             curPlayer = selectedPlayers.get(curIndex+1);
             return true;
         } else {
+            curPlayer = selectedPlayers.get(0);
             return false;
         }
     }
