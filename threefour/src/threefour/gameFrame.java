@@ -7,6 +7,7 @@ package threefour;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
 
 /**
  *
@@ -49,6 +50,7 @@ public class gameFrame extends javax.swing.JFrame {
         selectedPlayerText = new javax.swing.JTextField();
         prevButton = new javax.swing.JButton();
         nextButton = new javax.swing.JButton();
+        scoreScreenButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,6 +131,13 @@ public class gameFrame extends javax.swing.JFrame {
             }
         });
 
+        scoreScreenButton.setText("Score Screen");
+        scoreScreenButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                scoreScreenButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -170,15 +179,18 @@ public class gameFrame extends javax.swing.JFrame {
                             .addComponent(selectedPlayerText, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(namesList, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(prevButton))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(avgTimeList, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(curPlayerTimeList, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(nextButton))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(namesList, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(prevButton))
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(avgTimeList, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(curPlayerTimeList, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(nextButton)))
+                    .addComponent(scoreScreenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -221,7 +233,9 @@ public class gameFrame extends javax.swing.JFrame {
                             .addComponent(prevButton)
                             .addComponent(nextButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(selectedPlayerText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(selectedPlayerText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(scoreScreenButton))))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -252,12 +266,6 @@ public class gameFrame extends javax.swing.JFrame {
                 avgTimeList.add(String.valueOf(temp.get(i).getAvg()));
             }
             
-            /*
-            for (Player p : temp) {
-                namesList.add(p.getName());
-                avgTimeList.add(String.valueOf(Math.round(p.getAvg() * 1000) / 1000) + "ms");
-            }*/
-            
             if (gameData.curPlayer != null) {
                 for (Integer t : gameData.curPlayer.sortTimes()) {
                     curPlayerTimeList.add(String.valueOf(t) + "ms");
@@ -269,6 +277,7 @@ public class gameFrame extends javax.swing.JFrame {
             }
         }
     }
+    
     private void dataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataButtonActionPerformed
         gameData = new UsersData();
         String[] names = new String[]{"Bob", "Sam", "Jim", "Sammy", "A", "B", "C", "D", "E", "F"};
@@ -343,6 +352,8 @@ public class gameFrame extends javax.swing.JFrame {
 
     private void prevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevButtonActionPerformed
         scoreSection -= 5;
+        if (scoreSection == -1)
+            prevButton.setEnabled(false);
         updateLists();
     }//GEN-LAST:event_prevButtonActionPerformed
 
@@ -351,6 +362,14 @@ public class gameFrame extends javax.swing.JFrame {
         prevButton.setEnabled(true);
         updateLists();
     }//GEN-LAST:event_nextButtonActionPerformed
+
+    private void scoreScreenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scoreScreenButtonActionPerformed
+        ScoreMenuFrame menu = new ScoreMenuFrame();
+        menu.gameData = gameData;
+        menu.updateLists();
+        menu.setVisible(true);
+        
+    }//GEN-LAST:event_scoreScreenButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -404,6 +423,7 @@ public class gameFrame extends javax.swing.JFrame {
     private javax.swing.JButton prevButton;
     private javax.swing.JButton removeButton;
     private javax.swing.JButton resetButton;
+    private javax.swing.JButton scoreScreenButton;
     private javax.swing.JTextField selectText;
     private javax.swing.JTextField selectedPlayerText;
     private javax.swing.JTextField timeText;

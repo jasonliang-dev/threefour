@@ -73,17 +73,22 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="namesList" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
-                  <Component id="prevButton" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="avgTimeList" min="-2" pref="89" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="curPlayerTimeList" min="-2" pref="92" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="namesList" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
+                          <Component id="prevButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="avgTimeList" min="-2" pref="89" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="curPlayerTimeList" min="-2" pref="92" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="nextButton" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <Component id="nextButton" min="-2" max="-2" attributes="0"/>
+                  <Component id="scoreScreenButton" min="-2" pref="160" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="29" max="32767" attributes="0"/>
           </Group>
@@ -138,7 +143,10 @@
                           <Component id="nextButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="selectedPlayerText" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="selectedPlayerText" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="scoreScreenButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace pref="16" max="32767" attributes="0"/>
@@ -250,6 +258,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nextButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="scoreScreenButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Score Screen"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="scoreScreenButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
