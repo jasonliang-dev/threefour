@@ -29,6 +29,7 @@ public class FileHandler {
                 if(delimiter != -1) {
                     name = line.substring(start, delimiter);
                     
+                    //Grabs the individual's time and stores into an ArrayList
                     while(delimiter != line.length()-1 && delimiter != -1) {
                         start = delimiter+1;
                         delimiter = line.indexOf("*", start);
@@ -38,7 +39,7 @@ public class FileHandler {
                     delimiter = 0;
                     line = br.readLine();
                     users.addUser(name, reactionTimes);
-                } else {
+                } else { //Condition for players with no times stored
                     start = 0;
                     delimiter = 0;
                     users.addUser(name);
@@ -47,14 +48,8 @@ public class FileHandler {
             }
             
         } catch (Exception e) {
-            /*try {
-                FileWriter fw = new FileWriter(fullFileName);
-                BufferedWriter bw = new BufferedWriter(fw);
-                
-                bw.newLine();
-                bw.close();
-            } catch (Exception ee) {*/
-                System.out.println(e);
+            System.out.println(e);
+            System.out.println("ERROR WRITING TO FILE");
            
         }
     }
@@ -82,6 +77,7 @@ public class FileHandler {
             
             bw.close();
         } catch (Exception e) {
+            System.out.println(e);
             System.out.println("ERROR WRITING TO FILE");
         }
         
