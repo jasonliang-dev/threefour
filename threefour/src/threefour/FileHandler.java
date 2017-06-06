@@ -25,9 +25,10 @@ public class FileHandler {
             while(line != null) {
                 ArrayList<Integer> reactionTimes = new ArrayList();
                 delimiter = line.indexOf("*", start);
+                name = line.substring(start, delimiter);
                 
-                if(delimiter != -1) {
-                    name = line.substring(start, delimiter);
+                if(delimiter != line.length() - 1 && delimiter != -1) {
+                    
                     
                     //Grabs the individual's time and stores into an ArrayList
                     while(delimiter != line.length()-1 && delimiter != -1) {
@@ -37,8 +38,8 @@ public class FileHandler {
                     }
                     start = 0;
                     delimiter = 0;
-                    line = br.readLine();
                     users.addUser(name, reactionTimes);
+                    line = br.readLine();
                 } else { //Condition for players with no times stored
                     start = 0;
                     delimiter = 0;

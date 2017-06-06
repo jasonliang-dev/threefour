@@ -64,15 +64,23 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
                 {null, null, null},
                 {null, null, null},
                 {null, null, null},
+                {null, null, null},
                 {null, null, null}
             },
             new String [] {
                 "Ranking", "Name", "Average Time"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -178,12 +186,18 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
             ArrayList<Player> temp = gameData.sortUsers();
 
             
-            if (scoreSection + 5 < temp.size() - 5)
+            if (scoreSection + 5 < temp.size() - 1)
                 nextButton.setEnabled(true);
             else 
                 nextButton.setEnabled(false);
             
-            for (int i = scoreSection+1; i < scoreSection+6; i++) {
+            for(int row = 0;(scoreSection+1)+row < temp.size() && row < jTable1.getRowCount(); row++) {
+                jTable1.getModel().setValueAt((scoreSection + 2)+row, row, 0);
+                jTable1.getModel().setValueAt(temp.get((scoreSection+1)+row).getName(), row, 1);
+                jTable1.getModel().setValueAt(temp.get((scoreSection+1)+row).getAvg(), row, 2);
+            }
+            
+            for (int i = scoreSection+1; i < temp.size() && i < scoreSection+6; i++) {
                 String playerScore = "" + i + ". " + temp.get(i).getName() + "    " + temp.get(i).getAvg();
                 namesList.add(playerScore);
             }

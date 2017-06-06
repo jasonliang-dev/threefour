@@ -276,12 +276,13 @@ public class gameFrame extends javax.swing.JFrame {
                 allNamesList.add(n);
             }
             
-            if (scoreSection + 5 < temp.size() - 5)
+            if (scoreSection + 5 < temp.size() - 1)
                 nextButton.setEnabled(true);
             else 
                 nextButton.setEnabled(false);
+
             
-            for (int i = scoreSection+1; i < scoreSection+6; i++) {
+            for (int i = scoreSection+1; i < temp.size() && i < scoreSection+6; i++) {
                 namesList.add(temp.get(i).getName());
                 avgTimeList.add(String.valueOf(temp.get(i).getAvg()));
             }
@@ -316,14 +317,18 @@ public class gameFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_dataButtonActionPerformed
 
     private void addPlayerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPlayerButtonActionPerformed
-        String name = pNameText.getText();
+        /*String name = pNameText.getText();
 
         boolean addedPlayer = gameData.addUser(name);
 
         if (addedPlayer != true) {
             pNameText.setText("Name already used");
         }
-        updateLists();
+        updateLists();*/
+        
+        for (Player p : gameData.players) {
+            System.out.println(p.getName());
+        }
     }//GEN-LAST:event_addPlayerButtonActionPerformed
 
     private void allNamesListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allNamesListMouseClicked
