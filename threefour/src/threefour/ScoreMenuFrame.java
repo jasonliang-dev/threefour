@@ -1,5 +1,7 @@
 package threefour;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 
@@ -12,6 +14,16 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
     
     public ScoreMenuFrame() {
         initComponents();
+        
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            int height = screenSize.height;
+            int width = screenSize.width;
+            this.setSize(700, 400);
+
+            // here's the part where i center the jframe on screen
+            this.setLocationRelativeTo(null);
+
+            this.setVisible(true);
     }
 
     /**
@@ -24,11 +36,13 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         namesList = new java.awt.List();
-        avgTimeList = new java.awt.List();
         prevButton = new javax.swing.JButton();
         nextButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(680, 385));
 
         prevButton.setText("Previous");
         prevButton.setEnabled(false);
@@ -45,36 +59,57 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Ranking", "Name", "Average Time"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(143, 143, 143)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(namesList, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(avgTimeList, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addComponent(prevButton)
-                        .addGap(87, 87, 87)
-                        .addComponent(nextButton)))
-                .addContainerGap(224, Short.MAX_VALUE))
+                        .addComponent(prevButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(namesList, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(84, 84, 84)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(143, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(avgTimeList, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                    .addComponent(namesList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(namesList, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(prevButton)
                     .addComponent(nextButton))
                 .addContainerGap(17, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -122,15 +157,23 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ScoreMenuFrame().setVisible(true);
+                ScoreMenuFrame scoreFrame = new ScoreMenuFrame();
+                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                int height = screenSize.height;
+                int width = screenSize.width;
+                scoreFrame.setSize(700, 400);
+
+                // here's the part where i center the jframe on screen
+                scoreFrame.setLocationRelativeTo(null);
+
+                scoreFrame.setVisible(true);
             }
         });
     }
     
     public void updateLists() {
-        avgTimeList.removeAll();
         namesList.removeAll();
-
+        
         if (gameData.players.size() > 0) {
             ArrayList<Player> temp = gameData.sortUsers();
 
@@ -141,15 +184,16 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
                 nextButton.setEnabled(false);
             
             for (int i = scoreSection+1; i < scoreSection+6; i++) {
-                namesList.add(temp.get(i).getName());
-                avgTimeList.add(String.valueOf(temp.get(i).getAvg()));
+                String playerScore = "" + i + ". " + temp.get(i).getName() + "    " + temp.get(i).getAvg();
+                namesList.add(playerScore);
             }
 
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.List avgTimeList;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private java.awt.List namesList;
     private javax.swing.JButton nextButton;
     private javax.swing.JButton prevButton;

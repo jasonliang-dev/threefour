@@ -5,6 +5,8 @@
  */
 package threefour;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
@@ -53,6 +55,7 @@ public class gameFrame extends javax.swing.JFrame {
         scoreScreenButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(680, 385));
 
         dataButton.setText("Generate Data");
         dataButton.addActionListener(new java.awt.event.ActionListener() {
@@ -191,7 +194,7 @@ public class gameFrame extends javax.swing.JFrame {
                                 .addComponent(curPlayerTimeList, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(nextButton)))
                     .addComponent(scoreScreenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -401,7 +404,16 @@ public class gameFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new gameFrame().setVisible(true);
+                gameFrame mainFrame = new gameFrame();
+                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                int height = screenSize.height;
+                int width = screenSize.width;
+                mainFrame.setSize(700, 400);
+
+                // here's the part where i center the jframe on screen
+                mainFrame.setLocationRelativeTo(null);
+
+                mainFrame.setVisible(true);
             }
         });
     }
