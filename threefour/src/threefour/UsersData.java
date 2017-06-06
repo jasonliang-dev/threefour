@@ -66,18 +66,6 @@ public class UsersData {
         }
     }
     
-    //Remove after implementing ArrayList of CurrentUsers
-    public Player setCurrentUser(String name) {
-        if (nameUsed(name) > -1) {
-            int playerIndex = findPlayer(name);
-            
-            return players.get(playerIndex);
-        } else {
-            System.out.println("USER NOT FOUND");
-            return null;
-        }
-    }
-    
     /**
      * 
      * @return 

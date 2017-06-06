@@ -17,11 +17,15 @@ import javax.swing.JFrame;
  */
 public class gameFrame extends javax.swing.JFrame {
 
-    UsersData gameData;
+    UsersData gameData = new UsersData();
     int scoreSection = -1;
+    FileHandler filer = new FileHandler();
 
     public gameFrame() {
         initComponents();
+        
+        filer.readFile(gameData);
+        updateLists();
     }
 
     /**
@@ -53,6 +57,7 @@ public class gameFrame extends javax.swing.JFrame {
         prevButton = new javax.swing.JButton();
         nextButton = new javax.swing.JButton();
         scoreScreenButton = new javax.swing.JButton();
+        writeFileButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(680, 385));
@@ -141,6 +146,13 @@ public class gameFrame extends javax.swing.JFrame {
             }
         });
 
+        writeFileButton.setText("Save To File");
+        writeFileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                writeFileButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -192,9 +204,13 @@ public class gameFrame extends javax.swing.JFrame {
                                 .addComponent(avgTimeList, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(curPlayerTimeList, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(nextButton)))
-                    .addComponent(scoreScreenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                            .addComponent(nextButton))
+                        .addContainerGap(21, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(scoreScreenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(writeFileButton)
+                        .addGap(41, 41, 41))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,7 +254,8 @@ public class gameFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(selectedPlayerText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(scoreScreenButton))))
+                            .addComponent(scoreScreenButton)
+                            .addComponent(writeFileButton))))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -252,7 +269,7 @@ public class gameFrame extends javax.swing.JFrame {
         curPlayerTimeList.removeAll();
         curPlayersList.removeAll();
 
-        if (gameData.players.size() > 0) {
+        if (gameData != null && gameData.players.size() > 0) {
             ArrayList<Player> temp = gameData.sortUsers();
             
             for (String n : gameData.usedNames) {
@@ -282,7 +299,6 @@ public class gameFrame extends javax.swing.JFrame {
     }
     
     private void dataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataButtonActionPerformed
-        gameData = new UsersData();
         String[] names = new String[]{"Bob", "Sam", "Jim", "Sammy", "A", "B", "C", "D", "E", "F"};
 
         for (int i = 0; i < 10; i++) {
@@ -374,6 +390,10 @@ public class gameFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_scoreScreenButtonActionPerformed
 
+    private void writeFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_writeFileButtonActionPerformed
+        filer.writeFile(gameData.players);
+    }//GEN-LAST:event_writeFileButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -439,5 +459,6 @@ public class gameFrame extends javax.swing.JFrame {
     private javax.swing.JTextField selectText;
     private javax.swing.JTextField selectedPlayerText;
     private javax.swing.JTextField timeText;
+    private javax.swing.JButton writeFileButton;
     // End of variables declaration//GEN-END:variables
 }

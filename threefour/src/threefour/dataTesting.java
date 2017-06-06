@@ -20,7 +20,7 @@ public class dataTesting {
             allData.addUser(names[i], temp);
         }
         
-        Player curPlayer = allData.setCurrentUser("Bob");
+        /*
         Player otherPlayer = allData.players.get(1);
         
         System.out.println(otherPlayer.getName());
