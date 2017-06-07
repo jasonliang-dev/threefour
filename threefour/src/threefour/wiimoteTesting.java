@@ -8,7 +8,7 @@ public class wiimoteTesting extends javax.swing.JFrame {
 	static Wiimote[] wiimotes = new Wiimote[2];
 	static WiimoteFinder[] wmFinder = new WiimoteFinder[2];
 		
-	static boolean[] ledOff = {false, false, false, false};
+	boolean[] ledOff = {false, false, false, false};
 
 	/**
 	 * Creates new form wiimoteTesting
