@@ -42,6 +42,17 @@ public class Wiimote {
 		mote.setReportMode(ReportModeRequest.DATA_REPORT_0x31);
 		mote.addCoreButtonListener(buttonListener);
 	}
+
+	public double getPitch() {
+		// https://github.com/abstrakraft/cwiid/blob/fadf11e89b579bcc0336a0692ac15c93785f3f82/wminput/plugins/acc/acc.c#L131
+		double C = 2.448979592;
+		double xx = (motion[0] - 128) / C;
+		double yy = (motion[1] - 128) / C;
+		double zz = (motion[2] - 128) / C;
+		double roll = Math.atan(xx / zz);
+		if (zz <= 0.0) roll += Math.PI * ((xx > 0.0) ? 1 : -1);
+		return Math.atan(yy / zz * Math.cos(roll));
+	}
 	
 	public int[] getMotion() {
 		return motion;
