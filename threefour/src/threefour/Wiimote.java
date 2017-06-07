@@ -9,6 +9,8 @@ import motej.request.ReportModeRequest;
 
 public class Wiimote {
 
+	private final double C = 2.448979592;
+
 	private final Mote mote;
 
 	private final AccelerometerListener accelListener;
@@ -17,6 +19,10 @@ public class Wiimote {
 	private int[] motion = {130, 131, 152};
 	private String button = "none";
 
+	/**
+	 * creates a accelerometer and button listener
+	 * @param mote Mote object to associate with this one
+	 */
 	public Wiimote(Mote mote) {
 		this.mote = mote;
 		accelListener = new AccelerometerListener() {
@@ -42,9 +48,69 @@ public class Wiimote {
 		mote.setReportMode(ReportModeRequest.DATA_REPORT_0x31);
 		mote.addCoreButtonListener(buttonListener);
 	}
+
+	/**
+	 * Get acceleration
+	 * @return some number representing acceleration
+	 */
+	public double getAccel() {
+		double ax = Math.abs(getMotionG()[0]);
+		double ay = Math.abs(getMotionG()[1]);
+		double az = Math.abs(getMotionG()[2]);
+		return ax + ay + az;
+	}
+
+	/**
+	 * Get pitch
+	 * @return a value between -pi/2 (perfectly upward) to pi/2 (perfectly downward)
+	 */
+	public double getPitch() {
+		// https://github.com/abstrakraft/cwiid/blob/fadf11e89b579bcc0336a0692ac15c93785f3f82/wminput/plugins/acc/acc.c#L131
+		double xx = getMotionG()[0];
+		double yy = getMotionG()[1];
+		double zz = getMotionG()[2];
+		double roll = Math.atan(xx / zz);
+		if (zz <= 0.0) roll += Math.PI * ((xx > 0.0) ? 1 : -1);
+		return Math.atan(yy / zz * Math.cos(roll));
+	}
+
+	/**
+	 * Check if the remote is pointing away from the user
+	 * @param slot player slot
+	 * @return true if pointing away
+	 */
+	public boolean pointAway(int slot) {
+		double angle = 0.5; // a little above 30 degress from horizontal
+		return -angle < getPitch() && getPitch() < angle;
+	}
+
+	/**
+	 * Check if the remote is pointing down towards the floor
+	 * @param slot player slot
+	 * @return true if pointing down
+	 */
+	public boolean pointDown(int slot) {
+		return 1.0 < getPitch() && getPitch() < 1.57;
+	}
 	
+	/**
+	 * get input from x, y, and z axes
+	 * @return x axis in index 0, y axis in index 1,  etc
+	 */
 	public int[] getMotion() {
 		return motion;
+	}
+
+	/**
+	 * get motion with proper acceleration to use for calculations
+	 * @return x axis in index 0, y axis in index 1,  etc
+	 */
+	public double[] getMotionG() {
+		double[] axisG = new double[motion.length];
+		for (int k = 0; k < axisG.length; k++) {
+			axisG[k] = (motion[k] - 128) / C;
+		}
+		return axisG;
 	}
 
 	public String getButton() {

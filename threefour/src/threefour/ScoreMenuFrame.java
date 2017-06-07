@@ -191,6 +191,12 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
             else 
                 nextButton.setEnabled(false);
             
+            for(int row = 0; row < jTable1.getRowCount(); row++) {
+                jTable1.getModel().setValueAt("", row, 0);
+                jTable1.getModel().setValueAt("", row, 1);
+                jTable1.getModel().setValueAt("", row, 2);
+            }
+            
             for(int row = 0;(scoreSection+1)+row < temp.size() && row < jTable1.getRowCount(); row++) {
                 jTable1.getModel().setValueAt((scoreSection + 2)+row, row, 0);
                 jTable1.getModel().setValueAt(temp.get((scoreSection+1)+row).getName(), row, 1);
