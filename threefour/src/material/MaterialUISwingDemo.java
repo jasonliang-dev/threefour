@@ -18,7 +18,7 @@ public class MaterialUISwingDemo {
     
     JFrame frame = new JFrame ("Material Design UI for Swing by atharva washimkar");
     frame.setMinimumSize (new Dimension (300, 300));
-    JButton button = new MaterialButton ("TEST");
+    JButton button = new MaterialButton ("AYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
     
     frame.add (button, BorderLayout.WEST);
     frame.setVisible (true);

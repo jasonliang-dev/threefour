@@ -1,13 +1,41 @@
 package threefour;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import motej.Mote;
 
 public class mainGame {
+	TimerTask clock = new TimerTask() {
+		@Override
+		public void run() {
+			mainGame.step();
+		}
+	};
+	static String status = "IDLE";
+
 	static WiimoteFinder[] wmFinder = new WiimoteFinder[2];
 	static Wiimote[] wiimotes = new Wiimote[2];
-	static int[] playerTime = {0, 0};
 	static boolean[] ledOff = {false, false, false, false};
+	static int[] playerTime = {0, 0};
 
+	static int counter = 0;
+	static int randNum = randNum();
+
+	/**
+	 * Start a timer
+	 */
+	public mainGame() {
+		Timer time = new Timer();
+		time.schedule(new clock(), 0, 10);
+	}
+
+	/**
+	 * Run this every millisecond
+	 */
+	public void step() {
+		countDown();
+		gameStart.setStatus(status);
+	}
 
 	/**
 	 * Adds a new Wii Remote
@@ -35,19 +63,28 @@ public class mainGame {
 
 	/**
 	 * Announcer countdown
-	 * @throws java.lang.InterruptedException
 	 */
-	public static void countDown() throws InterruptedException {
+	public static void countDown() {
 		// TODO: audio
-		System.out.println("ready");
-		Thread.sleep((int)(Math.random() * 2000) + 3000);
-		System.out.println("DRAW");
-		// TODO: start clock for both players
+		if (playersReady()) {
+			if (counter == 0) {
+				System.out.println("ready");
+			}
+			counter++;
+		}
+		else {
+			counter = 0;
+			randNum = randNum();
+		}
+		if (counter == randNum) {
+			System.out.println("FIRE!");
+			// TODO: start clock for both players
+		}
 	}
 
 	public static boolean playersReady() {
 		for (Wiimote wm : wiimotes) {
-			if (!wm.getButton().equals("AB")) {
+			if (!wm.getButton().equals("AB") || !wm.pointDown()) {
 				return false;
 			}
 		}
@@ -66,6 +103,14 @@ public class mainGame {
 			// TODO: return the time in ms
 		}
 		return 0; // "AHHH I SHOT THE DIRT"
+	}
+
+	/**
+	 * Get a random number
+	 * @return a number between 2000 to 5000 (I think)
+	 */
+	public static int randNum() {
+		return (int)(Math.random() * 3000) + 2000;
 	}
 
 }

@@ -9,6 +9,7 @@ import java.util.logging.Logger;
  */
 public class gameStart extends javax.swing.JFrame {
 
+	mainGame G = new mainGame();
 	int moteNum = 2;
 
 	/**
@@ -78,11 +79,11 @@ public class gameStart extends javax.swing.JFrame {
 		while (!mainGame.playersReady()) {
 			System.out.print(""); // don't remove this line. the loop does not break without it
 		}
-		try {
-			mainGame.countDown();
-		} catch (InterruptedException ex) {
-			Logger.getLogger(gameStart.class.getName()).log(Level.SEVERE, null, ex);
-		}
+		mainGame.countDown();
+	}
+
+	public void setStatus(String s) {
+		statusLabel.setText(s);
 	}
 	/**
 	 * @param args the command line arguments
