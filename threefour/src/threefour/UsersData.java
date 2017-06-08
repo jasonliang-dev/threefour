@@ -9,6 +9,7 @@ public class UsersData {
     ArrayList<String> usedNames = new ArrayList();
     ArrayList<Player> selectedPlayers = new ArrayList();
     Player curPlayer; //Represents current player playing
+    FileHandler filer = new FileHandler();
     int maxName = 30;
     
     public boolean addUser(String name) {
@@ -146,13 +147,13 @@ public class UsersData {
      * 
      */
     public void importData() {
-        
+        filer.readFile(this);
     }
     
     /**
      * 
      */
     public void exportData() {
-        
+        filer.writeFile(players);
     }
 }

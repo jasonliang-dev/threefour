@@ -8,6 +8,10 @@ import java.util.ArrayList;
 
 public class FileHandler {
     
+    /**
+     * 
+     * @param users - Class that stores the player data for the game
+     */
     public void readFile(UsersData users) {
         String currentDirectory = System.getProperty("user.dir");
         String fullFileName = currentDirectory + "/times.txt";
@@ -55,31 +59,37 @@ public class FileHandler {
         }
     }
     
+    /**
+     * 
+     * @param players - List of player data to export to the file
+     */
     public void writeFile(ArrayList<Player> players) {
         String currentDirectory = System.getProperty("user.dir");
         String fullFileName = currentDirectory + "/times.txt";
         
-        try {
-            FileWriter fw = new FileWriter(fullFileName);
-            BufferedWriter bw = new BufferedWriter(fw);
-            
-            for(Player p : players) {
-                bw.write(p.getName());
-                
-                String tempTimes = "";
-                for(int i : p.reactionTimes) {
-                    tempTimes += "*" + i;
+        if(players.size() > 0) {
+            try {
+                FileWriter fw = new FileWriter(fullFileName);
+                BufferedWriter bw = new BufferedWriter(fw);
+
+                for(Player p : players) {
+                    bw.write(p.getName());
+
+                    String tempTimes = "";
+                    for(int i : p.reactionTimes) {
+                        tempTimes += "*" + i;
+                    }
+                    tempTimes += "*";
+
+                    bw.write(tempTimes);
+                    bw.newLine();
                 }
-                tempTimes += "*";
-                
-                bw.write(tempTimes);
-                bw.newLine();
+
+                bw.close();
+            } catch (Exception e) {
+                System.out.println(e);
+                System.out.println("ERROR WRITING TO FILE");
             }
-            
-            bw.close();
-        } catch (Exception e) {
-            System.out.println(e);
-            System.out.println("ERROR WRITING TO FILE");
         }
         
     }
