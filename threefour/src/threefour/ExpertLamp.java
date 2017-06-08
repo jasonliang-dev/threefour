@@ -9,7 +9,7 @@ public class ExpertLamp {
 		}
 		while (true) {
 			for (int k = 0; k < motesNum; k++) {
-				System.out.println(mainGame.playersReady(motesNum, "AB"));
+
 			}
 		}
 	}

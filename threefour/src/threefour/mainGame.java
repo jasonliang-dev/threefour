@@ -3,10 +3,11 @@ package threefour;
 import motej.Mote;
 
 public class mainGame {
-	static Wiimote[] wiimotes = new Wiimote[2];
 	static WiimoteFinder[] wmFinder = new WiimoteFinder[2];
-		
+	static Wiimote[] wiimotes = new Wiimote[2];
+	static int[] playerTime = {0, 0};
 	static boolean[] ledOff = {false, false, false, false};
+
 
 	/**
 	 * Adds a new Wii Remote
@@ -26,18 +27,45 @@ public class mainGame {
 	}
 
 	/**
-	 * Check if both players are "ready"
-	 * @param players number of players (which should always be 2 so there should be any parameters but whatever)
-	 * @param button the button(s) to press to be considered "ready" (can be "none")
-	 * @return true if all players press the button(s) specified
+	 * resets the game
 	 */
-	public static boolean playersReady(int players, String button) {
-		for (int k = 0; k < players; k++) {
-			Wiimote wm = wiimotes[k];
-			if (!wm.getButton().equals(button)) {
+	public static void endGame() {
+
+	}
+
+	/**
+	 * Announcer countdown
+	 * @throws java.lang.InterruptedException
+	 */
+	public static void countDown() throws InterruptedException {
+		// TODO: audio
+		System.out.println("ready");
+		Thread.sleep((int)(Math.random() * 2000) + 3000);
+		System.out.println("DRAW");
+		// TODO: start clock for both players
+	}
+
+	public static boolean playersReady() {
+		for (Wiimote wm : wiimotes) {
+			if (!wm.getButton().equals("AB")) {
 				return false;
 			}
 		}
 		return true;
 	}
+
+	/**
+	 * See if the player successfully fired 
+	 * @param slot player slot
+	 * @return time in ms if wiimote is facing away
+	 */
+	public static int fire(int slot) {
+		// TODO: stop the clock
+		Wiimote wm = wiimotes[slot];
+		if (wm.pointAway()) {
+			// TODO: return the time in ms
+		}
+		return 0; // "AHHH I SHOT THE DIRT"
+	}
+
 }

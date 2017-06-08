@@ -16,7 +16,7 @@ public class Wiimote {
 	private final AccelerometerListener accelListener;
 	private final CoreButtonListener buttonListener;
 
-	private int[] motion = {130, 131, 152};
+	private int[] motion = {0, 0, 0};
 	private String button = "none";
 
 	/**
@@ -50,6 +50,23 @@ public class Wiimote {
 	}
 
 	/**
+	 * Check if the remote is pointing away from the user
+	 * @return true if pointing away
+	 */
+	public boolean pointAway() {
+		double angle = 0.5; // a little above 30 degress from horizontal
+		return -angle < getPitch() && getPitch() < angle;
+	}
+
+	/**
+	 * Check if the remote is pointing down towards the floor
+	 * @return true if pointing down
+	 */
+	public boolean pointDown() {
+		return 1.0 < getPitch() && getPitch() < 1.57;
+	}
+
+	/**
 	 * Get acceleration
 	 * @return some number representing acceleration
 	 */
@@ -71,28 +88,9 @@ public class Wiimote {
 		double zz = getMotionG()[2];
 		double roll = Math.atan(xx / zz);
 		if (zz <= 0.0) roll += Math.PI * ((xx > 0.0) ? 1 : -1);
-		return Math.atan(yy / zz * Math.cos(roll));
+		return -Math.toDegrees( Math.atan(yy / zz * Math.cos(roll)) );
 	}
 
-	/**
-	 * Check if the remote is pointing away from the user
-	 * @param slot player slot
-	 * @return true if pointing away
-	 */
-	public boolean pointAway(int slot) {
-		double angle = 0.5; // a little above 30 degress from horizontal
-		return -angle < getPitch() && getPitch() < angle;
-	}
-
-	/**
-	 * Check if the remote is pointing down towards the floor
-	 * @param slot player slot
-	 * @return true if pointing down
-	 */
-	public boolean pointDown(int slot) {
-		return 1.0 < getPitch() && getPitch() < 1.57;
-	}
-	
 	/**
 	 * get input from x, y, and z axes
 	 * @return x axis in index 0, y axis in index 1,  etc
