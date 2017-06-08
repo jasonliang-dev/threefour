@@ -5,11 +5,16 @@
  */
 package threefour;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import material.GUITheme;
+import material.MaterialButton;
+import material.MaterialLookAndFeel;
 
 /**
  *
@@ -19,12 +24,12 @@ public class gameFrame extends javax.swing.JFrame {
 
     UsersData gameData = new UsersData();
     int scoreSection = -1;
-    FileHandler filer = new FileHandler();
+    FileHandler filer = gameData.filer;
 
     public gameFrame() {
         initComponents();
         
-        filer.readFile(gameData);
+        gameData.importData();
         updateLists();
     }
 
@@ -396,7 +401,7 @@ public class gameFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_scoreScreenButtonActionPerformed
 
     private void writeFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_writeFileButtonActionPerformed
-        filer.writeFile(gameData.players);
+        gameData.exportData();
     }//GEN-LAST:event_writeFileButtonActionPerformed
 
     /**
@@ -439,6 +444,10 @@ public class gameFrame extends javax.swing.JFrame {
                 mainFrame.setLocationRelativeTo(null);
 
                 mainFrame.setVisible(true);
+                
+                MaterialLookAndFeel ui = new MaterialLookAndFeel (GUITheme.LIGHT_THEME);
+                JButton button = new MaterialButton ("TEST");
+                mainFrame.add(button);
             }
         });
     }
