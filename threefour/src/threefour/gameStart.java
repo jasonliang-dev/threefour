@@ -1,15 +1,11 @@
 package threefour;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author jason
  */
 public class gameStart extends javax.swing.JFrame {
 
-	mainGame G = new mainGame();
 	int moteNum = 2;
 
 	/**
@@ -29,7 +25,7 @@ public class gameStart extends javax.swing.JFrame {
         private void initComponents() {
 
                 connectButton = new javax.swing.JButton();
-                statusLabel = new javax.swing.JLabel();
+                infoLabel = new javax.swing.JLabel();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -40,7 +36,7 @@ public class gameStart extends javax.swing.JFrame {
                         }
                 });
 
-                statusLabel.setText("nothing happening right now");
+                infoLabel.setText("nothing happening right now");
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
@@ -50,7 +46,7 @@ public class gameStart extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(connectButton)
-                                        .addComponent(statusLabel))
+                                        .addComponent(infoLabel))
                                 .addContainerGap(181, Short.MAX_VALUE))
                 );
                 layout.setVerticalGroup(
@@ -59,7 +55,7 @@ public class gameStart extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addComponent(connectButton)
                                 .addGap(18, 18, 18)
-                                .addComponent(statusLabel)
+                                .addComponent(infoLabel)
                                 .addContainerGap(230, Short.MAX_VALUE))
                 );
 
@@ -67,7 +63,6 @@ public class gameStart extends javax.swing.JFrame {
         }// </editor-fold>//GEN-END:initComponents
 
         private void connectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectButtonActionPerformed
-		statusLabel.setText("Connecting to wiimotes");
 		for (int k = 0; k < moteNum; k++) {
 			mainGame.addWiimote(k);
 		}
@@ -75,16 +70,13 @@ public class gameStart extends javax.swing.JFrame {
         }//GEN-LAST:event_connectButtonActionPerformed
 
 	public void newGame() {
-		statusLabel.setText("Waiting for players");
-		while (!mainGame.playersReady()) {
-			System.out.print(""); // don't remove this line. the loop does not break without it
-		}
-		mainGame.countDown();
+		mainGame.startTimer();
 	}
 
-	public void setStatus(String s) {
-		statusLabel.setText(s);
+	public static void setInfoLabel(String s) {
+		infoLabel.setText(s);
 	}
+
 	/**
 	 * @param args the command line arguments
 	 */
@@ -122,6 +114,6 @@ public class gameStart extends javax.swing.JFrame {
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JButton connectButton;
-        private javax.swing.JLabel statusLabel;
+        private static javax.swing.JLabel infoLabel;
         // End of variables declaration//GEN-END:variables
 }

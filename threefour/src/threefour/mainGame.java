@@ -4,37 +4,63 @@ import java.util.Timer;
 import java.util.TimerTask;
 import motej.Mote;
 
-public class mainGame {
-	TimerTask clock = new TimerTask() {
-		@Override
-		public void run() {
-			mainGame.step();
-		}
-	};
+public final class mainGame {
+	static TimerTask clock;
 	static String status = "IDLE";
+	static String info = "";
 
 	static WiimoteFinder[] wmFinder = new WiimoteFinder[2];
 	static Wiimote[] wiimotes = new Wiimote[2];
+	static String[] wiimoteButtons = {"none", "none"};
 	static boolean[] ledOff = {false, false, false, false};
 	static int[] playerTime = {0, 0};
 
 	static int counter = 0;
 	static int randNum = randNum();
 
-	/**
-	 * Start a timer
-	 */
-	public mainGame() {
+	private mainGame() {} // there should be only one mainGame
+				// also, everything is static
+
+	public static void startTimer() {
+		mainGame.clock = new TimerTask() {
+			@Override
+			public void run() {
+				mainGame.step();
+			}
+		};
 		Timer time = new Timer();
-		time.schedule(new clock(), 0, 10);
+		time.schedule(clock, 0, 10);
 	}
 
 	/**
 	 * Run this every millisecond
 	 */
-	public void step() {
-		countDown();
-		gameStart.setStatus(status);
+	public static void step() {
+		// TODO: audio
+		if (playersButton("AB")) {
+			status = "COUNT";
+		}
+		else {
+			info = "Point the remote downwards!";
+		}
+		if (status.equals("COUNT")) {
+			if (playersPointDown()) {
+				if (counter == 0) {
+					info = "Ready?";
+				}
+				counter++;
+				if (counter == randNum) {
+					info = "FIRE!";
+					// TODO: start clock for both players
+				}
+			}
+			else {
+				counter = 0;
+				System.out.println("Point the remote downwards!");
+				randNum = randNum();
+			}
+		}
+		gameStart.setInfoLabel(info);
 	}
 
 	/**
@@ -65,26 +91,30 @@ public class mainGame {
 	 * Announcer countdown
 	 */
 	public static void countDown() {
-		// TODO: audio
-		if (playersReady()) {
-			if (counter == 0) {
-				System.out.println("ready");
-			}
-			counter++;
-		}
-		else {
-			counter = 0;
-			randNum = randNum();
-		}
-		if (counter == randNum) {
-			System.out.println("FIRE!");
-			// TODO: start clock for both players
-		}
+
 	}
 
-	public static boolean playersReady() {
+	/**
+	 * see if all players are pressing a button
+	 * @param s button
+	 * @return true if players are pressing the button specified
+	 */
+	public static boolean playersButton(String s) {
 		for (Wiimote wm : wiimotes) {
-			if (!wm.getButton().equals("AB") || !wm.pointDown()) {
+			if (!wm.getButton().equals(s)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * see if all players are pointing the remote down
+	 * @return true if remotes are pointing down
+	 */
+	public static boolean playersPointDown() {
+		for (Wiimote wm : wiimotes) {
+			if (!wm.pointDown()) {
 				return false;
 			}
 		}
@@ -94,7 +124,7 @@ public class mainGame {
 	/**
 	 * See if the player successfully fired 
 	 * @param slot player slot
-	 * @return time in ms if wiimote is facing away
+	 * @return time in ms if remote is facing away
 	 */
 	public static int fire(int slot) {
 		// TODO: stop the clock
