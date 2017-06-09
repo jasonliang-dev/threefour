@@ -5,8 +5,8 @@ import java.util.Collections;
 
 
 public class Player implements Comparable<Player> {
-    String name;
-    double avg = 0;
+    private String name;
+    private double avg = 0;
     ArrayList<Integer> reactionTimes = new ArrayList();
  
     Player(String name) {
@@ -62,7 +62,7 @@ public class Player implements Comparable<Player> {
         findAvg();
     }
     
-    public ArrayList<Integer> sortTimes() {
+    private ArrayList<Integer> sortTimes() {
         ArrayList<Integer> temp = new ArrayList();
         
         for(Integer t : reactionTimes) {

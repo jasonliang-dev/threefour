@@ -8,17 +8,22 @@ public class UsersData {
     ArrayList<Player> players = new ArrayList();
     ArrayList<String> usedNames = new ArrayList();
     ArrayList<Player> selectedPlayers = new ArrayList();
-    Player curPlayer; //Represents current player playing
     FileHandler filer = new FileHandler();
-    int maxName = 30;
+    private int maxName = 30;
     
+    /**
+     * Used to add new user to the game with a given name
+     * @param name
+     * Provided by the user. Must be unique, otherwise name will not be used. 
+     * @return True if the provided name is not already used and is valid. 
+     */
     public boolean addUser(String name) {
         boolean success = false;
         
         if (name.length() > maxName)
             System.out.println("Name is too long");
         else if (nameUsed(name) > -1)
-            System.out.println("Name is already used. Please enter a different name."); // Integrate error messages into jFrame
+            System.out.println("Name is already used. Please enter a different name.");
         else {
             usedNames.add(name);
             players.add(new Player(name));
@@ -28,6 +33,14 @@ public class UsersData {
         return success;
     }
     
+    /**
+     * Used to import data from a file with a specific player's time data
+     * Should not be used during the regular run-time of the game
+     * Only used during initial run of the game to import player data 
+     * @param name
+     * @param reactionTime
+     * @return True if the player can be successfully imported. 
+     */
     public boolean addUser(String name, ArrayList<Integer> reactionTime) {
         boolean success = false;
         
@@ -44,6 +57,10 @@ public class UsersData {
         return success;
     }
     
+    /**
+     * Stores a list of users that are actively playing the game
+     * @param name - Name of a valid user that will be playing the game
+     */
     public void setCurUser(String name) {
         if (nameUsed(name) > -1) {
             int playerIndex = findPlayer(name);
@@ -62,7 +79,6 @@ public class UsersData {
                 }
             } else {
                 selectedPlayers.add(temp);
-                curPlayer = selectedPlayers.get(0);
             }
         }
     }
@@ -107,17 +123,17 @@ public class UsersData {
      * @param name Takes in a String for the user's name
      * @return true - if name is used; false if name is not used
      */
-    public int nameUsed(String name) {
+    private int nameUsed(String name) {
         return usedNames.indexOf(name);
     }
     
     /**
-     * 
+     * Checks whether the user is valid (If they are stored in the game already)
      * @param name Takes in a String for the user's name
      * @return -1 if no user with given "name"
      * Otherwise, returns the index of the player with the given "name"
      */
-    public int findPlayer(String name) {
+    private int findPlayer(String name) {
         int playerIndex = -1;
         for (int i = 0; i < players.size(); i++) {
             Player p = players.get(i);
@@ -131,27 +147,16 @@ public class UsersData {
         return playerIndex;
     }
     
-    public boolean nextPlayer() {
-        int curIndex = selectedPlayers.indexOf(curPlayer);
-        
-        if (curIndex < selectedPlayers.size() - 1) {
-            curPlayer = selectedPlayers.get(curIndex+1);
-            return true;
-        } else {
-            curPlayer = selectedPlayers.get(0);
-            return false;
-        }
-    }
-    
     /**
-     * 
+     * Used to grab user data from a file
+     * Recommended to run the method when the game first begins
      */
     public void importData() {
         filer.readFile(this);
     }
     
     /**
-     * 
+     * Writes all user data to a file
      */
     public void exportData() {
         filer.writeFile(players);

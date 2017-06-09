@@ -39,7 +39,6 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="timeText" alignment="0" max="32767" attributes="0"/>
                                   <Component id="curNameText" alignment="0" max="32767" attributes="0"/>
                                   <Component id="selectText" alignment="0" max="32767" attributes="0"/>
                               </Group>
@@ -50,14 +49,7 @@
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="removeButton" min="-2" max="-2" attributes="0"/>
-                                          <Component id="resetButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="addTimeButton" min="-2" pref="80" max="-2" attributes="0"/>
+                                      <Component id="removeButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -65,14 +57,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="allNamesList" min="-2" pref="65" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="curPlayersList" min="-2" pref="116" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="nextPlayerButton" min="-2" max="-2" attributes="0"/>
-                          <Component id="selectedPlayerText" min="-2" pref="82" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <Component id="curPlayersList" alignment="0" min="-2" pref="116" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -90,7 +75,7 @@
                           </Group>
                           <Component id="nextButton" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="21" max="32767" attributes="0"/>
+                      <EmptySpace pref="24" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="scoreScreenButton" min="-2" pref="160" max="-2" attributes="0"/>
@@ -113,31 +98,22 @@
                       <Component id="namesList" max="32767" attributes="0"/>
                   </Group>
                   <Component id="allNamesList" min="-2" pref="267" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="removeButton" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="dataButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="pNameText" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="addPlayerButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="selectText" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="curPlayerButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="curNameText" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                      <Component id="removeButton" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="dataButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="pNameText" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="addPlayerButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="resetButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="timeText" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="addTimeButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="selectText" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="curPlayerButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="curNameText" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -146,13 +122,11 @@
                   <Component id="curPlayersList" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="nextPlayerButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="prevButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="nextButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="selectedPlayerText" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="scoreScreenButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="writeFileButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -221,36 +195,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="removeButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="resetButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Reset Times"/>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resetButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="timeText">
-    </Component>
-    <Component class="javax.swing.JButton" name="addTimeButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Add Time"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addTimeButtonActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="java.awt.List" name="curPlayersList">
-    </Component>
-    <Component class="javax.swing.JButton" name="nextPlayerButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Next Player"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nextPlayerButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="selectedPlayerText">
     </Component>
     <Component class="javax.swing.JButton" name="prevButton">
       <Properties>
