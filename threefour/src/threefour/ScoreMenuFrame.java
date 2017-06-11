@@ -8,9 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
-import material.GUITheme;
-import material.MaterialButton;
-import material.MaterialLookAndFeel;
 
 
 public class ScoreMenuFrame extends javax.swing.JFrame {
@@ -18,7 +15,6 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
     UsersData gameData;
     int scoreSection = -1;
     int maxUsersShown = 10;
-    gameFrame parent;
     DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer(); //used to center align the text in  jTable
     
     public ScoreMenuFrame() {
@@ -27,7 +23,7 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
             int height = screenSize.height;
             int width = screenSize.width;
-            this.setSize(1000, 400);
+            this.setSize(700, 500);
 
             // here's the part where i center the jframe on screen
             this.setLocationRelativeTo(null);
@@ -37,8 +33,7 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
             playerTimesTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
             playerTimesTable.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
             playerTimesTable.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
-            
-            
+                
     }
 
     /**
@@ -50,7 +45,6 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        namesList = new java.awt.List();
         prevButton = new javax.swing.JButton();
         nextButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -58,13 +52,8 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
         returnButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(680, 385));
-
-        namesList.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                namesListActionPerformed(evt);
-            }
-        });
+        setPreferredSize(new java.awt.Dimension(700, 500));
+        setSize(new java.awt.Dimension(700, 500));
 
         prevButton.setText("Previous");
         prevButton.setEnabled(false);
@@ -75,12 +64,14 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
         });
 
         nextButton.setText("Next");
+        nextButton.setEnabled(false);
         nextButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nextButtonActionPerformed(evt);
             }
         });
 
+        playerTimesTable.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         playerTimesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -132,41 +123,34 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(returnButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33))
+                        .addComponent(returnButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(208, 208, 208)
+                        .addGap(207, 207, 207)
                         .addComponent(prevButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(87, 87, 87)))
-                .addComponent(namesList, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(280, Short.MAX_VALUE))
+                        .addGap(107, 107, 107)
+                        .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(returnButton)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(prevButton))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(nextButton))))
-                    .addComponent(namesList, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(returnButton)
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(prevButton)
+                    .addComponent(nextButton))
+                .addGap(0, 120, Short.MAX_VALUE))
         );
 
         pack();
@@ -189,10 +173,6 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
     private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
         this.dispose();
     }//GEN-LAST:event_returnButtonActionPerformed
-
-    private void namesListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namesListActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_namesListActionPerformed
 
     
     public static void main(String args[]) {
@@ -238,11 +218,9 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
     }
     
     public void updateLists() {
-        namesList.removeAll();
         
         if (gameData.players.size() > 0) {
             ArrayList<Player> temp = gameData.sortUsers();
-
             
             if (scoreSection + maxUsersShown < temp.size() - 1)
                 nextButton.setEnabled(true);
@@ -255,23 +233,18 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
                 playerTimesTable.getModel().setValueAt("", row, 2);
             }
             
+
             for(int row = 0;(scoreSection+1)+row < temp.size() && row < playerTimesTable.getRowCount(); row++) {
                 playerTimesTable.getModel().setValueAt((scoreSection + 2)+row, row, 0);
                 playerTimesTable.getModel().setValueAt(temp.get((scoreSection+1)+row).getName(), row, 1);
                 playerTimesTable.getModel().setValueAt(temp.get((scoreSection+1)+row).getAvg(), row, 2);
             }
             
-            for (int i = scoreSection+1; i < temp.size() && i < scoreSection+(maxUsersShown+1); i++) {
-                String playerScore = "" + i + ". " + temp.get(i).getName() + "    " + temp.get(i).getAvg();
-                namesList.add(playerScore);
-            }
-
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private java.awt.List namesList;
     private javax.swing.JButton nextButton;
     private javax.swing.JTable playerTimesTable;
     private javax.swing.JButton prevButton;

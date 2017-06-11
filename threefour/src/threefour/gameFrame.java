@@ -230,7 +230,7 @@ public class gameFrame extends javax.swing.JFrame {
         if (gameData != null && gameData.players.size() > 0) {
             ArrayList<Player> temp = gameData.sortUsers();
             
-            for (String n : gameData.usedNames) {
+            for (String n : gameData.storedNames) {
                 allNamesList.add(n);
             }
             

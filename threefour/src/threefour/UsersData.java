@@ -6,7 +6,7 @@ import java.util.List;
 
 public class UsersData {
     ArrayList<Player> players = new ArrayList();
-    ArrayList<String> usedNames = new ArrayList();
+    ArrayList<String> storedNames = new ArrayList();
     ArrayList<Player> selectedPlayers = new ArrayList();
     FileHandler filer = new FileHandler();
     private int maxName = 30;
@@ -20,17 +20,29 @@ public class UsersData {
     public boolean addUser(String name) {
         boolean success = false;
         
-        if (name.length() > maxName)
-            System.out.println("Name is too long");
-        else if (nameUsed(name) > -1)
-            System.out.println("Name is already used. Please enter a different name.");
-        else {
-            usedNames.add(name);
+        if (validName(name)) {
+            storedNames.add(name);
             players.add(new Player(name));
             success = true;
         }
         
         return success;
+    }
+    
+    public boolean validName(String name) {
+        if (name.length() > maxName || name.equals("") || nameUsed(name) > -1)
+            return false;
+        
+        return true;
+    }
+    
+    public boolean nameSelected(String name) {
+        for(Player p : selectedPlayers) {
+            if(p.getName().equals(name))
+                return false;
+        }
+        
+        return true;
     }
     
     /**
@@ -44,17 +56,23 @@ public class UsersData {
     public boolean addUser(String name, ArrayList<Integer> reactionTime) {
         boolean success = false;
         
-        if (name.length() > maxName) 
-            System.out.println("Name is too long");
-        else if (nameUsed(name) > -1)
-            System.out.println("Name is already used. Please enter a different name."); // Integrate error messages into jFrame
-        else {
-            usedNames.add(name);
+        if (validName(name)) {
+            storedNames.add(name);
             players.add(new Player(name, reactionTime));
             success = true;
         }
         
         return success;
+    }
+    
+    public boolean timeRecorded() {
+        for(Player p : players) {
+            if (p.getAvg() > 0) {
+                return true;
+            }
+        }
+        
+        return false;
     }
     
     /**
@@ -113,7 +131,7 @@ public class UsersData {
         
         if (playerIndex != -1) {
             players.remove(playerIndex);
-            usedNames.remove(name);
+            storedNames.remove(name);
         } else 
             System.out.println("USER NOT FOUND");
     }
@@ -123,8 +141,8 @@ public class UsersData {
      * @param name Takes in a String for the user's name
      * @return true - if name is used; false if name is not used
      */
-    private int nameUsed(String name) {
-        return usedNames.indexOf(name);
+    public int nameUsed(String name) {
+        return storedNames.indexOf(name);
     }
     
     /**

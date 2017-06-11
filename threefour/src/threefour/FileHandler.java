@@ -54,7 +54,7 @@ public class FileHandler {
             
         } catch (Exception e) {
             System.out.println(e);
-            System.out.println("ERROR WRITING TO FILE");
+            System.out.println("ERROR READING TO FILE");
            
         }
     }
