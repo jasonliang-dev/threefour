@@ -23,7 +23,7 @@ public final class mainGame {
 
 	/**
 	 * create and start a new timer
-	 * the step method will be called every millisecond-ish
+	 * the step method will be called every millisecond-ish.
 	 */
 	public static void startTimer() {
 		mainGame.clock = new TimerTask() {
@@ -37,42 +37,60 @@ public final class mainGame {
 	}
 
 	/**
-	 * Run this every millisecond(-ish)
+	 * Run this every millisecond(-ish).
 	 */
 	public static void step() {
 		// TODO: audio
-		if (playersButton("AB")) {
-			status = "COUNT";
-		}
-		else if (!status.equals("COUNT")) {
-			info = "Press A and B to start";
-		}
-		if (status.equals("COUNT")) {
-			if (playersPointDown()) {
-				if (counter == 0) {
-					info = "Ready?";
+		switch (status) {
+			case "IDLE":
+				if (playersButton("AB")) {
+					status = "COUNT";
 				}
-				counter++;
-				if (counter == randNum) {
-					status = "RUN";
-					info = "FIRE!";
-					// TODO: start clock for both players
+				else if (!status.equals("COUNT")) {
+					info = "Press A and B to start";
 				}
-			}
-			else {
-				counter = 0;
-				info = "Point the remote downwards!";
-				randNum = randNum();
-			}
-		}
-		else if (status.equals("RUN")) {
-
+				break;
+			case "COUNT":
+				if (playersPointDown()) {
+					if (counter == 0) {
+						info = "Ready?";
+					}
+					counter++;
+					if (counter == randNum) {
+						status = "RUN";
+						info = "FIRE!";
+						// TODO: start clock for both players
+					}
+				}
+				else {
+					counter = 0;
+					info = "Point the remote downwards!";
+				}
+				break;
+			case "RUN":
+				//TODO: listen for a button press
+				for (int k = 0; k < wiimotes.length; k++) {
+					Wiimote wm = wiimotes[k];
+					String button = wm.getButton();
+					if (button.equals("B")) {
+						if (wm.pointAway()) {
+							// TODO: set the time for the player
+						}
+						else {
+							playerTime[k] = 0;
+						}
+					}
+				}
+				break;
+			default:
+				//status = "IDLE";
+				break;
 		}
 		gameStart.setInfoLabel(info);
 	}
 
 	/**
-	 * Adds a new Wii Remote
+	 * Adds a new Wii Remote.
 	 * @param slot player slot
 	 */
 	public static void addWiimote(int slot) {
@@ -89,21 +107,21 @@ public final class mainGame {
 	}
 
 	/**
-	 * resets the game
+	 * Resets the game.
 	 */
 	public static void endGame() {
 
 	}
 
 	/**
-	 * Announcer countdown
+	 * Announcer countdown.
 	 */
 	public static void countDown() {
 
 	}
 
 	/**
-	 * see if all players are pressing a button
+	 * see if all players are pressing a button.
 	 * @param s button
 	 * @return true if players are pressing the button specified
 	 */
@@ -117,7 +135,7 @@ public final class mainGame {
 	}
 
 	/**
-	 * see if all players are pointing the remote down
+	 * see if all players are pointing the remote down.
 	 * @return true if remotes are pointing down
 	 */
 	public static boolean playersPointDown() {
@@ -130,7 +148,7 @@ public final class mainGame {
 	}
 
 	/**
-	 * See if the player successfully fired 
+	 * See if the player successfully fired.
 	 * @param slot player slot
 	 * @return time in ms if remote is facing away
 	 */
@@ -144,7 +162,7 @@ public final class mainGame {
 	}
 
 	/**
-	 * Get a random number
+	 * Get a random number.
 	 * @return a number between 2000 to 5000 (I think)
 	 */
 	public static int randNum() {
