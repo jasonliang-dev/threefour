@@ -1,24 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package menu;
 
 import javax.swing.ImageIcon;
+import java.io.*;
+import sun.audio.*;
 
-/**
- *
- * @author jason
- */
+
+
 public class MenuFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MenuFrame
-     */
     public ImageIcon initial = new ImageIcon(getClass().getResource("/Images/Start1.png"));
     public ImageIcon hover = new ImageIcon(getClass().getResource("/Images/Start2.png"));
     public ImageIcon press = new ImageIcon(getClass().getResource("/Images/Start3.png"));
+    
+//    public String press = new String(getClass().getResource("/Images/Start3.png"));
     
     public MenuFrame() {
         initComponents();
@@ -94,6 +89,17 @@ public class MenuFrame extends javax.swing.JFrame {
 
     private void ButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonMouseReleased
         Button.setIcon(hover);
+        
+        try { 
+                InputStream in = getClass().getResourceAsStream("/Noises/mitochondria.wav");
+           
+                AudioStream audioStream = new AudioStream(in);
+
+                
+                AudioPlayer.player.start(audioStream);
+        }
+        catch (Exception e) {
+        }
     }//GEN-LAST:event_ButtonMouseReleased
 
     /**
