@@ -18,9 +18,13 @@ public final class mainGame {
 	static int counter = 0;
 	static int randNum = randNum();
 
-	private mainGame() {} // there should be only one mainGame
-				// also, everything is static
+	private mainGame() {} // private because there should be only one mainGame
+				// note: everything is static
 
+	/**
+	 * create and start a new timer
+	 * the step method will be called every millisecond-ish
+	 */
 	public static void startTimer() {
 		mainGame.clock = new TimerTask() {
 			@Override
@@ -33,15 +37,15 @@ public final class mainGame {
 	}
 
 	/**
-	 * Run this every millisecond
+	 * Run this every millisecond(-ish)
 	 */
 	public static void step() {
 		// TODO: audio
 		if (playersButton("AB")) {
 			status = "COUNT";
 		}
-		else {
-			info = "Point the remote downwards!";
+		else if (!status.equals("COUNT")) {
+			info = "Press A and B to start";
 		}
 		if (status.equals("COUNT")) {
 			if (playersPointDown()) {
@@ -50,15 +54,19 @@ public final class mainGame {
 				}
 				counter++;
 				if (counter == randNum) {
+					status = "RUN";
 					info = "FIRE!";
 					// TODO: start clock for both players
 				}
 			}
 			else {
 				counter = 0;
-				System.out.println("Point the remote downwards!");
+				info = "Point the remote downwards!";
 				randNum = randNum();
 			}
+		}
+		else if (status.equals("RUN")) {
+
 		}
 		gameStart.setInfoLabel(info);
 	}
