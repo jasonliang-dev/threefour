@@ -41,7 +41,8 @@ public class Wiimote {
 				if (evt.isButtonAPressed() && evt.isButtonBPressed()) button = "AB";
 				else if (evt.isButtonAPressed()) button = "A";
 				else if (evt.isButtonBPressed()) button = "B";
-				else if (evt.isNoButtonPressed()) button = "none";
+				else if (evt.isButtonPlusPressed()) button = "PLUS";
+				else if (evt.isNoButtonPressed()) button = "NONE";
 			}
 		};
 		mote.addAccelerometerListener(accelListener);

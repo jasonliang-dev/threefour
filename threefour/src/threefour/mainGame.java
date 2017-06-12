@@ -13,6 +13,7 @@ public final class mainGame {
 	static Wiimote[] wiimotes = new Wiimote[2];
 	static String[] wiimoteButtons = {"none", "none"};
 	static boolean[] ledOff = {false, false, false, false};
+	static boolean[] timeSet = {false, false};
 	static int[] playerTime = {0, 0};
 
 	static int counter = 0;
@@ -33,7 +34,7 @@ public final class mainGame {
 			}
 		};
 		Timer time = new Timer();
-		time.schedule(clock, 0, 10);
+		time.schedule(clock, 1, 1);
 	}
 
 	/**
@@ -46,7 +47,7 @@ public final class mainGame {
 				if (playersButton("AB")) {
 					status = "COUNT";
 				}
-				else if (!status.equals("COUNT")) {
+				else {
 					info = "Press A and B to start";
 				}
 				break;
@@ -60,6 +61,9 @@ public final class mainGame {
 						status = "RUN";
 						info = "FIRE!";
 						// TODO: start clock for both players
+						for (int k = 0; k < wiimotes.length; k++) {
+							playerTime[k] = 0;
+						}
 					}
 				}
 				else {
@@ -69,16 +73,38 @@ public final class mainGame {
 				break;
 			case "RUN":
 				//TODO: listen for a button press
+				boolean playersFired = true;
 				for (int k = 0; k < wiimotes.length; k++) {
-					Wiimote wm = wiimotes[k];
-					String button = wm.getButton();
-					if (button.equals("B")) {
-						if (wm.pointAway()) {
-							// TODO: set the time for the player
+					if (!timeSet[k]) {
+						playersFired = false;
+						playerTime[k]++;
+						Wiimote wm = wiimotes[k];
+						String button = wm.getButton();
+						if (button.equals("B")) {
+							timeSet[k] = true;
+							if (!wm.pointAway()) {
+								playerTime[k] = 0;
+							}
 						}
-						else {
-							playerTime[k] = 0;
-						}
+					}
+				}
+				if (playersFired) {
+					status = "END";
+				}
+				break;
+			case "END":
+				if (playerTime[0] > playerTime[1]) {
+					info = "Player 1 wins!";
+				}
+				else if (playerTime[1] > playerTime[0]) {
+					info = "Player 2 wins!";
+				}
+				else {
+					info = "It's a tie!";
+				}
+				for (Wiimote wm : wiimotes) {
+					if (wm.getButton().equals("PLUS")) {
+						status = "IDLE";
 					}
 				}
 				break;
