@@ -60,9 +60,9 @@ public final class mainGame {
 					if (counter == randNum) {
 						status = "RUN";
 						info = "FIRE!";
-						// TODO: start clock for both players
 						for (int k = 0; k < wiimotes.length; k++) {
 							playerTime[k] = 0;
+							timeSet[k] = false;
 						}
 					}
 				}
@@ -93,26 +93,42 @@ public final class mainGame {
 				}
 				break;
 			case "END":
-				if (playerTime[0] > playerTime[1]) {
+				if (playerTime[0] < playerTime[1] && playerTime[0] != 0) {
 					info = "Player 1 wins!";
 				}
-				else if (playerTime[1] > playerTime[0]) {
+				else if (playerTime[1] < playerTime[0] && playerTime[1] != 0) {
 					info = "Player 2 wins!";
 				}
 				else {
-					info = "It's a tie!";
+					info = "IT'S A TIE!";
 				}
-				for (Wiimote wm : wiimotes) {
-					if (wm.getButton().equals("PLUS")) {
-						status = "IDLE";
-					}
-				}
+				cont("TIME");
+				break;
+			case "TIME":
+				info = "TIME: " + playerTime[0] + ", " + playerTime[1];
+				cont("PITCH");
+				break;
+			case "PITCH":
+				info = "PITCH: " + wiimotes[0].getPitch() + ", " + wiimotes[1].getPitch();
+				cont("IDLE");
 				break;
 			default:
 				//status = "IDLE";
 				break;
 		}
 		gameStart.setInfoLabel(info);
+	}
+
+	/**
+	 * Contine to next status.
+	 * @param s name of state.
+	 */
+	public static void cont(String s) {
+		for (Wiimote wm : wiimotes) {
+			if (wm.getButton().equals("PLUS")) {
+				status = s;
+			}
+		}
 	}
 
 	/**

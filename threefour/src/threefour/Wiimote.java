@@ -55,7 +55,7 @@ public class Wiimote {
 	 * @return true if pointing away
 	 */
 	public boolean pointAway() {
-		double angle = 0.5; // a little above 30 degress from horizontal
+		double angle = 0.5; // a little below 30 degress from horizontal
 		return -angle < getPitch() && getPitch() < angle;
 	}
 
@@ -64,7 +64,7 @@ public class Wiimote {
 	 * @return true if pointing down
 	 */
 	public boolean pointDown() {
-		return 1.0 < getPitch() && getPitch() < 1.57;
+		return 1.0 < getPitch() && getPitch() < (Math.PI / 2);
 	}
 
 	/**
@@ -89,7 +89,7 @@ public class Wiimote {
 		double zz = getMotionG()[2];
 		double roll = Math.atan(xx / zz);
 		if (zz <= 0.0) roll += Math.PI * ((xx > 0.0) ? 1 : -1);
-		return -Math.toDegrees( Math.atan(yy / zz * Math.cos(roll)) );
+		return Math.atan(yy / zz * Math.cos(roll));
 	}
 
 	/**
