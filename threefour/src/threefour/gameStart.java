@@ -6,7 +6,7 @@ package threefour;
  */
 public class gameStart extends javax.swing.JFrame {
 
-	int moteNum = 2;
+	int moteNum = mainGame.wiimotes.length;
 
 	/**
 	 * Creates new form gameStart
@@ -26,6 +26,8 @@ public class gameStart extends javax.swing.JFrame {
 
                 connectButton = new javax.swing.JButton();
                 infoLabel = new javax.swing.JLabel();
+                player1Label = new javax.swing.JLabel();
+                player2Label = new javax.swing.JLabel();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -36,7 +38,16 @@ public class gameStart extends javax.swing.JFrame {
                         }
                 });
 
-                infoLabel.setText("nothing happening right now");
+                infoLabel.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+                infoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                infoLabel.setText("Idle");
+
+                player1Label.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+                player1Label.setText("P1");
+
+                player2Label.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+                player2Label.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+                player2Label.setText("P2");
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
@@ -45,9 +56,15 @@ public class gameStart extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(connectButton)
-                                        .addComponent(infoLabel))
-                                .addContainerGap(181, Short.MAX_VALUE))
+                                        .addComponent(infoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(connectButton)
+                                                .addGap(0, 784, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(player1Label)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(player2Label)))
+                                .addContainerGap())
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -56,39 +73,51 @@ public class gameStart extends javax.swing.JFrame {
                                 .addComponent(connectButton)
                                 .addGap(18, 18, 18)
                                 .addComponent(infoLabel)
-                                .addContainerGap(230, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(player1Label)
+                                        .addComponent(player2Label))
+                                .addContainerGap())
                 );
 
                 pack();
         }// </editor-fold>//GEN-END:initComponents
 
         private void connectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectButtonActionPerformed
+		connectButton.setVisible(false);
 		for (int k = 0; k < moteNum; k++) {
 			mainGame.addWiimote(k);
 		}
-		newGame();
-        }//GEN-LAST:event_connectButtonActionPerformed
-
-	public void newGame() {
 		mainGame.startTimer();
-	}
+        }//GEN-LAST:event_connectButtonActionPerformed
 
 	public static void setInfoLabel(String s) {
 		infoLabel.setText(s);
+	}
+	
+	public static void setPlayerLabel(int slot, String s) {
+		javax.swing.JLabel label;
+		switch (slot) {
+			case 0:
+				label = player1Label;
+				break;
+			case 1:
+				label = player2Label;
+				break;
+			default:
+				return;
+		}
+		label.setText(s);
 	}
 
 	/**
 	 * @param args the command line arguments
 	 */
 	public static void main(String args[]) {
-		/* Set the Nimbus look and feel */
-		//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-		/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-		 */
+		/* Set GTK theme */
 		try {
 			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
+				if ("GTK+".equals(info.getName())) {
 					javax.swing.UIManager.setLookAndFeel(info.getClassName());
 					break;
 				}
@@ -115,5 +144,7 @@ public class gameStart extends javax.swing.JFrame {
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JButton connectButton;
         private static javax.swing.JLabel infoLabel;
+        private static javax.swing.JLabel player1Label;
+        private static javax.swing.JLabel player2Label;
         // End of variables declaration//GEN-END:variables
 }
