@@ -30,9 +30,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-              <Component id="playButton" min="-2" pref="105" max="-2" attributes="0"/>
-              <EmptySpace pref="323" max="32767" attributes="0"/>
+              <EmptySpace pref="469" max="32767" attributes="0"/>
               <Component id="rankingButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
           </Group>
@@ -42,24 +40,13 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="191" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="playButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="rankingButton" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="rankingButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="playButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Play"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="playButtonActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="rankingButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ranking"/>
