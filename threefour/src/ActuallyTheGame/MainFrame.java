@@ -10,19 +10,15 @@ import threefour.FileHandler;
 public abstract class MainFrame extends JFrame {
     static UsersData gameData = new UsersData();
     static JFrame mainMenuFrame;
+    static boolean gameStarted = false; //indicates whether to import  data from file or not, ensures no overwriting of existing data
     
-    protected int frameHeight;
-    protected int frameWidth;
+    protected int frameHeight = 768;
+    protected int frameWidth = 1024;
     protected JPanel curPanel;
-    
-    MainFrame(int width, int height) {
-        frameHeight = height;
-        frameWidth = width;
-        gameData.importData();
-    }
     
     public void setup(String imageFileName) {
         setBackgroundImage(imageFileName);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE); //ensures program stops running when frame closes
         
         // here's the part where i center the jframe on screen
         this.setSize(frameWidth, frameHeight);

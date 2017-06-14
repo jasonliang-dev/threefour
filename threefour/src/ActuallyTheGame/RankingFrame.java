@@ -14,8 +14,8 @@ import static ActuallyTheGame.MainFrame.gameData;
 import threefour.Player;
 
 public class RankingFrame extends MainFrame {
-    int scoreSection = -1;
-    int maxUsersShown = 10;
+    private int scoreSection = -1;
+    private int maxUsersShown = 10;
     
     DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer(); //used to center align the text in  jTable
     JButton returnButton = new JButton("Main Menu");
@@ -25,85 +25,87 @@ public class RankingFrame extends MainFrame {
     JScrollPane defaultScrollPane = new JScrollPane();
     JTable playerTimesTable = new JTable();
     
-    public RankingFrame(int width, int height) { 
-        super(width, height);
+    public RankingFrame() { 
         setup("background_blank.png");
         updateFrame();
     }
     
     public void addComponents() {
+        int genXPos = (frameWidth/2);
+        int genYPos = (frameHeight/2)-25;
+        
         returnButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     returnButtonActionPerformed(evt);
                 }
-            });
-            returnButton.setBounds(10, 10, 100, 25);
-            
-            prevButton.setBounds(272+50, 500, 100, 25);
-            prevButton.setEnabled(false);
-            prevButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    prevButtonActionPerformed(evt);
-                }
-            });
-            
-            nextButton.setBounds(702-100, 500, 100, 25);
-            nextButton.setEnabled(false);
-            nextButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    nextButtonActionPerformed(evt);
-                }
-            });
-            
-            playerTimesTable.setFont(new java.awt.Font("Noto Sans", 0, 24)); // NOI18N
-            playerTimesTable.setRowHeight(27);
-            
-            playerTimesTable.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-                    {null, null, null},
-                    {null, null, null},
-                    {null, null, null},
-                    {null, null, null},
-                    {null, null, null},
-                    {null, null, null},
-                    {null, null, null},
-                    {null, null, null},
-                    {null, null, null},
-                    {null, null, null}
-                },
-                new String [] {
-                    "", "", "Average Time"
-                }
-            ) {
-                Class[] types = new Class [] {
-                    java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
-                };
-                boolean[] canEdit = new boolean [] {
-                    false, false, false
-                };
+        });
+        returnButton.setBounds(10, 10, 100, 25);
 
-                public Class getColumnClass(int columnIndex) {
-                    return types [columnIndex];
-                }
-
-                public boolean isCellEditable(int rowIndex, int columnIndex) {
-                    return canEdit [columnIndex];
-                }
-            });
-            
-            defaultScrollPane.setViewportView(playerTimesTable);
-                if (playerTimesTable.getColumnModel().getColumnCount() > 0) {
-                    playerTimesTable.getColumnModel().getColumn(0).setMinWidth(80);
-                    playerTimesTable.getColumnModel().getColumn(0).setMaxWidth(80);
-                    playerTimesTable.getColumnModel().getColumn(2).setMinWidth(200);
-                    playerTimesTable.getColumnModel().getColumn(2).setMaxWidth(200);
+        prevButton.setBounds(genXPos - 190, genYPos+116, 100, 25);
+        prevButton.setEnabled(false);
+        prevButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                prevButtonActionPerformed(evt);
             }
-            defaultScrollPane.setBounds(272, 175, 480, 300);
-            
-            curPanel.add(returnButton);
-            curPanel.add(nextButton);
-            curPanel.add(prevButton);
-            curPanel.add(defaultScrollPane);
+        });
+
+        nextButton.setBounds(genXPos+90, genYPos+116, 100, 25);
+        nextButton.setEnabled(false);
+        nextButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextButtonActionPerformed(evt);
+            }
+        });
+
+        playerTimesTable.setFont(new java.awt.Font("Noto Sans", 0, 24)); // NOI18N
+        playerTimesTable.setRowHeight(27);
+
+        playerTimesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "", "", "Average Time"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+
+        defaultScrollPane.setViewportView(playerTimesTable);
+            if (playerTimesTable.getColumnModel().getColumnCount() > 0) {
+                playerTimesTable.getColumnModel().getColumn(0).setMinWidth(80);
+                playerTimesTable.getColumnModel().getColumn(0).setMaxWidth(80);
+                playerTimesTable.getColumnModel().getColumn(2).setMinWidth(200);
+                playerTimesTable.getColumnModel().getColumn(2).setMaxWidth(200);
+        }
+        defaultScrollPane.setBounds(genXPos-240, genYPos-209, 480, 300);
+
+        curPanel.add(returnButton);
+        curPanel.add(nextButton);
+        curPanel.add(prevButton);
+        curPanel.add(defaultScrollPane);
     }
     
     private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
@@ -150,5 +152,39 @@ public class RankingFrame extends MainFrame {
             }
             
         }
+    }
+    
+    //REMOVE WHEN GAME IS FINISHED
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(threefour.MainMenuFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(threefour.MainMenuFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(threefour.MainMenuFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(threefour.MainMenuFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new RankingFrame();
+            }
+        });
     }
 }

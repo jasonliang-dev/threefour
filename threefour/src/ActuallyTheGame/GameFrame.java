@@ -7,8 +7,7 @@ public class GameFrame extends MainFrame {
     //to add the necessary components at each stage
     //ie. Before playing, during play, and after play
     
-    public GameFrame(int width, int height) {
-        super(width, height); 
+    public GameFrame() {
         setup("background_blank.png");
         updateFrame();
     }

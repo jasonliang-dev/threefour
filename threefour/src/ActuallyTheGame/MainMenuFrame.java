@@ -17,10 +17,14 @@ import threefour.PlayerSelectionFrame;
 
 public class MainMenuFrame extends MainFrame {
     
-    MainMenuFrame(int width, int height) {
-        super(width, height);
+    MainMenuFrame() {
         mainMenuFrame = this;
-        gameData.importData();
+        
+        if (gameStarted == false) {
+            gameData.importData();
+            gameStarted = true;
+        }
+        
         setup("background_main.png");
     }
     
@@ -48,20 +52,20 @@ public class MainMenuFrame extends MainFrame {
             }
         });
         
-        play.setBounds(25, 50, 75, 25);
-        ranking.setBounds(285, 50, 85, 25);
+        play.setBounds((frameWidth/2)-37-200, (frameHeight/2) - 12-50, 75, 25);
+        ranking.setBounds((frameWidth/2)-42+200, (frameHeight/2)-12-50, 85, 25);
         
         curPanel.add(play);
         curPanel.add(ranking);
     }
     
     private void playActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
-        PlayersSelectFrame playersSelect = new PlayersSelectFrame(frameWidth, frameHeight);
+        PlayersSelectFrame playersSelect = new PlayersSelectFrame();
         this.setVisible(false);
     }
     
     private void rankingActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
-        RankingFrame rankingFrame = new RankingFrame(frameWidth, frameHeight);
+        RankingFrame rankingFrame = new RankingFrame();
         this.setVisible(false);
     }
     
@@ -93,7 +97,7 @@ public class MainMenuFrame extends MainFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainMenuFrame(1024, 768);
+                new MainMenuFrame();
             }
         });
     }

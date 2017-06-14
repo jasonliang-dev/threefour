@@ -19,19 +19,18 @@ public class UsersData {
      */
     public boolean addUser(String name) {
         boolean success = false;
-        if(name.equals("") != true) {
-            if (validName(name)) {
-                storedNames.add(name);
-                players.add(new Player(name));
-                success = true;
-            }
+        
+        if (validName(name)) {
+            storedNames.add(name);
+            players.add(new Player(name));
+            success = true;
         }
         
         return success;
     }
     
     public boolean validName(String name) {
-        if (name.length() > maxName || name.equals("") || nameUsed(name) > -1)
+        if (name.length() > maxName || name.equals("") || nameUsed(name) > -1 || nameSelected(name) > 0)
             return false;
         
         return true;
@@ -40,7 +39,7 @@ public class UsersData {
     /**
      * Checks to see if name has been chosen as a player for the game
      * @param name
-     * @return Returns true if player is selected; otherwise, false
+     * @return Returns 1 if player is selected; otherwise -1
      */
     public int nameSelected(String name) {
         if (name.equals(""))
@@ -48,10 +47,10 @@ public class UsersData {
         else if (selectedPlayers.size() > 0) {
             for(Player p : selectedPlayers) {
                 if(p.getName().equals(name))
-                    return(-1);
+                    return(1);
             }
         }
-        return (1);
+        return (-1);
     }
     
     /**
