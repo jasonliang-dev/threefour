@@ -6,25 +6,37 @@ import java.util.TimerTask;
 import motej.Mote;
 
 public final class mainGame {
-	static TimerTask clock;
-	static String status = "IDLE";
-	static String info = "";
+	// there are two players
+	static final int C = 2;
 
-	static WiimoteFinder[] wmFinder = new WiimoteFinder[2];
-	static Wiimote[] wiimotes = new Wiimote[2];
-	static String[] wiimoteButtons = {"none", "none"};
+	static TimerTask clock; // for step method
+	static String status = "IDLE"; // state of the game
+	static String info = ""; // info text
+
+	static WiimoteFinder[] wmFinder = new WiimoteFinder[C];
+	static Wiimote[] wiimotes = new Wiimote[C];
+
+	static Player[] players = new Player[C];
+
 	static boolean[] playerFlag = {false, false};
 	static int[] playerTime = {0, 0};
-	static double[] playerAngle = {0, 0};
-	static DecimalFormat timeFormat = new DecimalFormat("0.000");
-	static DecimalFormat angleFormat = new DecimalFormat("00.0");
+	static String[] playerAngle = {"", ""};
+
+	static DecimalFormat timeFormat = new DecimalFormat("0.000"); // stop the labels from jumping around
+	static DecimalFormat angleFormat = new DecimalFormat("0.0"); // too many decimals. remove them.
 
 
 	static int counter = 0;
 	static int randNum = randNum();
 
-	private mainGame() {} // private because there should be only one mainGame
-				// note: everything is static
+	private mainGame() {
+		/*
+		  everything is static
+		  class is final
+		  constructor is private
+		  because there should only be one mainGame
+		*/
+	}
 
 	/**
 	 * create and start a new timer
@@ -52,7 +64,7 @@ public final class mainGame {
 			case "IDLE": // new game
 				boolean ready = true;
 
-				for (int k = 0; k < wiimotes.length; k++) {
+				for (int k = 0; k < C; k++) {
 					if (playerFlag[k]) {
 						gameStart.setPlayerLabel(k, "OK");
 					}
@@ -79,10 +91,9 @@ public final class mainGame {
 			case "COUNT": // countdown
 				boolean point = true;
 
-				for (int k = 0; k < wiimotes.length; k++) {
+				for (int k = 0; k < C; k++) {
 					Wiimote wm = wiimotes[k];
 					if (wm.pointDown()) {
-						Mote m = wm.getMote();
 						gameStart.setPlayerLabel(k, "OK");
 					}
 					else {
@@ -100,9 +111,9 @@ public final class mainGame {
 						info = "FIRE!";
 						status = "RUN";
 
-						for (int k = 0; k < wiimotes.length; k++) {
+						for (int k = 0; k < C; k++) {
 							playerTime[k] = 0;
-							playerAngle[k] = 0;
+							playerAngle[k] = "";
 						}
 					}
 				}
@@ -114,9 +125,9 @@ public final class mainGame {
 			case "RUN": // clock is ticking! quick! fire!
 				boolean playersFired = true;
 
-				for (int k = 0; k < wiimotes.length; k++) {
-					gameStart.setPlayerLabel(k, timeFormat.format(playerTime[k] / 1000.0));
-					//gameStart.setPlayerLabel(k, "");
+				for (int k = 0; k < C; k++) {
+					double t = playerTime[k] / 1000.0;
+					gameStart.setPlayerLabel(k, timeFormat.format(t));
 
 					if (!playerFlag[k]) {
 						playersFired = false;
@@ -126,9 +137,10 @@ public final class mainGame {
 						String button = wm.getButton();
 						if (button.equals("B")) {
 							Mote m = wm.getMote();
-							m.rumble(100l);
+							m.rumble(120l);
 							playerFlag[k] = true;
-							playerAngle[k] = Double.parseDouble(angleFormat.format(-Math.toDegrees(wm.getPitch())));
+							double a = -Math.toDegrees(wm.getPitch()); // convert pitch to degress
+							playerAngle[k] = angleFormat.format(a); // then format
 
 							if (!wm.pointAway()) {
 								playersFired = true;
@@ -165,7 +177,7 @@ public final class mainGame {
 					info = "Something went wrong.";
 				}
 
-				for (int k = 0; k < wiimotes.length; k++) {
+				for (int k = 0; k < C; k++) {
 					if (pt[k] == 0) {
 						gameStart.setPlayerLabel(k, "DQ");
 					}
@@ -175,8 +187,8 @@ public final class mainGame {
 			case "PITCH": // display pitch
 				info = "Angle of shot";
 
-				for (int k = 0; k < wiimotes.length; k++) {
-					gameStart.setPlayerLabel(k, String.valueOf(playerAngle[k]));
+				for (int k = 0; k < C; k++) {
+					gameStart.setPlayerLabel(k, playerAngle[k]);
 				}
 				cont(5, "END");
 				break;
@@ -184,7 +196,7 @@ public final class mainGame {
 				String s = "Press  +  to start a new game!";
 
 				info = s;
-				for (int k = 0; k < wiimotes.length; k++) {
+				for (int k = 0; k < C; k++) {
 					gameStart.setPlayerLabel(k, s);
 
 					Wiimote wm = wiimotes[k];
@@ -233,7 +245,7 @@ public final class mainGame {
 	 * Sets all indexes of playerFlag to false.
 	 */
 	public static void resetFlag() {
-		for (int k = 0; k < wiimotes.length; k++) {
+		for (int k = 0; k < C; k++) {
 			playerFlag[k] = false;
 		}
 	}

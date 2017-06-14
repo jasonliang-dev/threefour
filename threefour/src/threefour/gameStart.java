@@ -6,7 +6,7 @@ package threefour;
  */
 public class gameStart extends javax.swing.JFrame {
 
-	int moteNum = mainGame.wiimotes.length;
+	int moteNum = mainGame.C;
 
 	/**
 	 * Creates new form gameStart
@@ -24,23 +24,16 @@ public class gameStart extends javax.swing.JFrame {
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
-                connectButton = new javax.swing.JButton();
                 infoLabel = new javax.swing.JLabel();
                 player1Label = new javax.swing.JLabel();
                 player2Label = new javax.swing.JLabel();
+                connectButton = new javax.swing.JButton();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-                connectButton.setText("Connect");
-                connectButton.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                connectButtonActionPerformed(evt);
-                        }
-                });
-
                 infoLabel.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
                 infoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                infoLabel.setText("Idle");
+                infoLabel.setText("Please connect the Wiimotes");
 
                 player1Label.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
                 player1Label.setText("P1");
@@ -49,6 +42,13 @@ public class gameStart extends javax.swing.JFrame {
                 player2Label.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
                 player2Label.setText("P2");
 
+                connectButton.setText("Connect");
+                connectButton.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                connectButtonActionPerformed(evt);
+                        }
+                });
+
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
@@ -56,24 +56,24 @@ public class gameStart extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(infoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(connectButton)
-                                                .addGap(0, 784, Short.MAX_VALUE))
+                                        .addComponent(infoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(player1Label)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(player2Label)))
+                                                .addComponent(player2Label))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(connectButton)
+                                                .addGap(0, 0, Short.MAX_VALUE)))
                                 .addContainerGap())
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(connectButton)
-                                .addGap(18, 18, 18)
                                 .addComponent(infoLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(connectButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 173, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(player1Label)
                                         .addComponent(player2Label))
