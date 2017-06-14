@@ -31,8 +31,8 @@ public final class mainGame {
 
 	private mainGame() {
 		/*
-		  everything is static
 		  class is final
+		  everything is static
 		  constructor is private
 		  because there should only be one mainGame
 		*/
@@ -106,10 +106,14 @@ public final class mainGame {
 						info = "Ready?";
 					}
 					counter++;
+					if (counter == 800) {
+						new soundPlayer("ready.wav");
+					}
 					if (counter == randNum) {
 						counter = 0;
 						info = "FIRE!";
 						status = "RUN";
+						new soundPlayer("go.wav");
 
 						for (int k = 0; k < C; k++) {
 							playerTime[k] = 0;
