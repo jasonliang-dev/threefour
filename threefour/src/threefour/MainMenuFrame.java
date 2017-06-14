@@ -23,17 +23,18 @@ public class MainMenuFrame extends javax.swing.JFrame {
     public MainMenuFrame() throws IOException {
         initComponents();
 
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        /*Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int height = screenSize.height;
         int width = screenSize.width;
-        this.setSize(400, 400);
+        */
+        this.setSize(1024, 768);
 
         String currentDirectory = System.getProperty("user.dir");
-        String fullFileName = currentDirectory + "/background.png";
+        String fullFileName = currentDirectory + "/background_main.png";
 
         BufferedImage myImage = ImageIO.read(new File(fullFileName));
         this.setContentPane(new ContentPanel(myImage));
-
+        
         JButton play = new JButton("Play");
         play.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,7 +116,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
 
     private void rankingActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
         ScoreMenuFrame rankingFrame = new ScoreMenuFrame();
-        rankingFrame.gamesData = gameData;
+        rankingFrame.gameData = gameData;
         rankingFrame.updateLists();
         rankingFrame.setVisible(true);
     }

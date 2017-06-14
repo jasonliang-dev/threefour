@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class UsersData {
-    ArrayList<Player> players = new ArrayList();
-    ArrayList<String> storedNames = new ArrayList();
-    ArrayList<Player> selectedPlayers = new ArrayList();
+    public ArrayList<Player> players = new ArrayList();
+    public ArrayList<String> storedNames = new ArrayList();
+    public ArrayList<Player> selectedPlayers = new ArrayList();
     FileHandler filer = new FileHandler();
     private int maxName = 30;
     

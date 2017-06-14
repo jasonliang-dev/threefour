@@ -24,7 +24,6 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
     int scoreSection = -1;
     int maxUsersShown = 10;
     DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer(); //used to center align the text in  jTable
-    UsersData gamesData;
     
     JButton returnButton = new JButton("Main Menu");
     JButton prevButton = new JButton("Prev");
@@ -40,10 +39,10 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
             int height = screenSize.height;
             int width = screenSize.width;
-            this.setSize(400, 400);
+            this.setSize(1024, 768);
             
             String currentDirectory = System.getProperty("user.dir");
-            String fullFileName = currentDirectory + "/background.png";
+            String fullFileName = currentDirectory + "/background_blank.png";
 
             BufferedImage myImage = ImageIO.read(new File(fullFileName));
             this.setContentPane(new ContentPanel(myImage));
@@ -55,7 +54,7 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
             });
             returnButton.setBounds(10, 10, 100, 25);
             
-            prevButton.setBounds(10, 320, 100, 25);
+            prevButton.setBounds(272+50, 500, 100, 25);
             prevButton.setEnabled(false);
             prevButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,7 +62,7 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
                 }
             });
             
-            nextButton.setBounds(290, 320, 100, 25);
+            nextButton.setBounds(702-100, 500, 100, 25);
             nextButton.setEnabled(false);
             nextButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,7 +70,9 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
                 }
             });
             
-            playerTimesTable.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+            playerTimesTable.setFont(new java.awt.Font("Noto Sans", 0, 24)); // NOI18N
+            playerTimesTable.setRowHeight(27);
+            
             playerTimesTable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
                     {null, null, null},
@@ -107,12 +108,12 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
             
             defaultScrollPane.setViewportView(playerTimesTable);
                 if (playerTimesTable.getColumnModel().getColumnCount() > 0) {
-                    playerTimesTable.getColumnModel().getColumn(0).setMinWidth(40);
-                    playerTimesTable.getColumnModel().getColumn(0).setMaxWidth(40);
-                    playerTimesTable.getColumnModel().getColumn(2).setMinWidth(100);
-                    playerTimesTable.getColumnModel().getColumn(2).setMaxWidth(100);
+                    playerTimesTable.getColumnModel().getColumn(0).setMinWidth(80);
+                    playerTimesTable.getColumnModel().getColumn(0).setMaxWidth(80);
+                    playerTimesTable.getColumnModel().getColumn(2).setMinWidth(200);
+                    playerTimesTable.getColumnModel().getColumn(2).setMaxWidth(200);
             }
-            defaultScrollPane.setBounds(10, 75, 380, 200);
+            defaultScrollPane.setBounds(272, 175, 480, 300);
             
             /*centerRenderer.setHorizontalAlignment(JLabel.CENTER);
             playerTimesTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
@@ -272,7 +273,7 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
     public void updateLists() {
         
         if (gameData.players.size() > 0) {
-            /*
+            
             ArrayList<Player> temp = gameData.sortUsers();
             
             if (scoreSection + maxUsersShown < temp.size() - 1)
@@ -291,7 +292,7 @@ public class ScoreMenuFrame extends javax.swing.JFrame {
                 playerTimesTable.getModel().setValueAt((scoreSection + 2)+row, row, 0);
                 playerTimesTable.getModel().setValueAt(temp.get((scoreSection+1)+row).getName(), row, 1);
                 playerTimesTable.getModel().setValueAt(temp.get((scoreSection+1)+row).getAvg(), row, 2);
-            }*/
+            }
             
         }
     }

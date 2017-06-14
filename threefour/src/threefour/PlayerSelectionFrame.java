@@ -39,10 +39,10 @@ public class PlayerSelectionFrame extends javax.swing.JFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int height = screenSize.height;
         int width = screenSize.width;
-        this.setSize(400, 400);
+        this.setSize(1024, 768);
         
         String currentDirectory = System.getProperty("user.dir");
-        String fullFileName = currentDirectory + "/background.png";
+        String fullFileName = currentDirectory + "/background_blank.png";
 
         BufferedImage myImage = ImageIO.read(new File(fullFileName));
         this.setContentPane(new ContentPanel(myImage));
@@ -242,6 +242,8 @@ public class PlayerSelectionFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_namesChoice1ItemStateChanged
 
     public void updateLists() {
+        System.out.println(gameData.players.size());
+        
         for(String name : gameData.storedNames) {
             names1Choice.add(name);
             names2Choice.add(name);
