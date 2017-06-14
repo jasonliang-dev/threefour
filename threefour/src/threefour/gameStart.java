@@ -91,11 +91,11 @@ public class gameStart extends javax.swing.JFrame {
 		mainGame.startTimer();
         }//GEN-LAST:event_connectButtonActionPerformed
 
-	public static void setInfoLabel(String s) {
+	public void setInfoLabel(String s) {
 		infoLabel.setText(s);
 	}
 	
-	public static void setPlayerLabel(int slot, String s) {
+	public void setPlayerLabel(int slot, String s) {
 		javax.swing.JLabel label;
 		switch (slot) {
 			case 0:
@@ -113,7 +113,7 @@ public class gameStart extends javax.swing.JFrame {
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String args[]) {
+	public void main(String args[]) {
 		/* Set GTK theme */
 		try {
 			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

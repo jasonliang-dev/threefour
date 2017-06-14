@@ -1,4 +1,4 @@
-package threefour;
+package ActuallyTheGame;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,7 +8,7 @@ public class UsersData {
     public ArrayList<Player> players = new ArrayList();
     public ArrayList<String> storedNames = new ArrayList();
     public ArrayList<Player> selectedPlayers = new ArrayList();
-    FileHandler filer = new FileHandler();
+    public FileHandler filer = new FileHandler();
     private int maxName = 30;
     
     /**

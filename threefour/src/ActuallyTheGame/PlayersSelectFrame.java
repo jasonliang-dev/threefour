@@ -1,7 +1,11 @@
 package ActuallyTheGame;
 
+import static ActuallyTheGame.MainFrame.gameData;
 import java.awt.Choice;
+import java.awt.Color;
+import java.awt.Font;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -12,11 +16,11 @@ public class PlayersSelectFrame extends MainFrame {
 
     private JButton setNameButton = new JButton("Set Name");
     private JTextField player1Text = new JTextField();
-    ;
     private JTextField player2Text = new JTextField();
-    ;
     private Choice names1Choice = new Choice();
     private Choice names2Choice = new Choice();
+    private JLabel p1Label = new JLabel("Player 1");
+    private JLabel p2Label = new JLabel("Player 2");
 
     public PlayersSelectFrame() {
         setup("background_blank.png");
@@ -25,7 +29,7 @@ public class PlayersSelectFrame extends MainFrame {
 
     public void addComponents() {
         //Represents general the x and y coordinates for all components
-        int genYPos = (frameHeight / 2)-50;
+        int genYPos = (frameHeight / 2)-40;
         int genXPos = (frameWidth / 2);
 
         setNameButton.setBounds(genXPos - 45, genYPos + 50, 90, 25);
@@ -49,9 +53,17 @@ public class PlayersSelectFrame extends MainFrame {
             }
         });
         names2Choice.setEnabled(false);
-
+        
         player1Text.setBounds(genXPos-265, genYPos - 100, 150, 25);
         player2Text.setBounds(genXPos+115, genYPos-100, 150, 25);
+        
+        p1Label.setBounds(genXPos-265, genYPos - 125, 150, 25);
+        p1Label.setForeground(Color.WHITE);
+        p1Label.setFont(new Font("SansSerif", Font.BOLD, 12));
+        p2Label.setBounds(genXPos+115, genYPos-125, 150, 25);
+        p2Label.setForeground(Color.WHITE);
+        p1Label.setFont(new Font("SansSerif", Font.BOLD, 12));
+        
         player2Text.setEnabled(false);
 
         curPanel.add(setNameButton);
@@ -59,6 +71,8 @@ public class PlayersSelectFrame extends MainFrame {
         curPanel.add(player2Text);
         curPanel.add(names1Choice);
         curPanel.add(names2Choice);
+        curPanel.add(p1Label);
+        curPanel.add(p2Label);
     }
 
     private void setNameButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,7 +105,6 @@ public class PlayersSelectFrame extends MainFrame {
 
                 setNameButton.setText("Continue");
                 GameFrame game = new GameFrame();
-                gameData.exportData();
                 this.dispose();
             } else {
                 player2Text.setText("Invalid name");

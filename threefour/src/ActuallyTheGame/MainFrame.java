@@ -4,8 +4,6 @@ import ActuallyTheGame.ImagePanel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import threefour.UsersData;
-import threefour.FileHandler;
 
 public abstract class MainFrame extends JFrame {
     static UsersData gameData = new UsersData();

@@ -11,7 +11,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import static ActuallyTheGame.MainFrame.gameData;
-import threefour.Player;
 
 public class RankingFrame extends MainFrame {
     private int scoreSection = -1;
@@ -163,7 +162,7 @@ public class RankingFrame extends MainFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("GTK".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
