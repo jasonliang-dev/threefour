@@ -93,6 +93,7 @@ public class Wiimote {
 		if (zz <= 0.0) roll += Math.PI * ((xx > 0.0) ? 1 : -1);
 		return Math.atan(yy / zz * Math.cos(roll));
 	}
+	// :mahjong: :mahjong: :mahjong: :mahjong: :mahjong: :mahjong: :mahjong:
 
 	/**
 	 * get input from x, y, and z axes
