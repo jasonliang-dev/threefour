@@ -19,11 +19,12 @@ public class UsersData {
      */
     public boolean addUser(String name) {
         boolean success = false;
-        
-        if (validName(name)) {
-            storedNames.add(name);
-            players.add(new Player(name));
-            success = true;
+        if(name.equals("") != true) {
+            if (validName(name)) {
+                storedNames.add(name);
+                players.add(new Player(name));
+                success = true;
+            }
         }
         
         return success;
@@ -36,13 +37,21 @@ public class UsersData {
         return true;
     }
     
-    public boolean nameSelected(String name) {
-        for(Player p : selectedPlayers) {
-            if(p.getName().equals(name))
-                return false;
+    /**
+     * Checks to see if name has been chosen as a player for the game
+     * @param name
+     * @return Returns true if player is selected; otherwise, false
+     */
+    public int nameSelected(String name) {
+        if (name.equals(""))
+            return 0;
+        else if (selectedPlayers.size() > 0) {
+            for(Player p : selectedPlayers) {
+                if(p.getName().equals(name))
+                    return(-1);
+            }
         }
-        
-        return true;
+        return (1);
     }
     
     /**
@@ -64,7 +73,11 @@ public class UsersData {
         
         return success;
     }
-    
+     
+    /**
+     * Checks to see if any of the players have at least a single time recorded in the game. 
+     * @return 
+     */
     public boolean timeRecorded() {
         for(Player p : players) {
             if (p.getAvg() > 0) {
@@ -123,7 +136,7 @@ public class UsersData {
     } 
     
     /**
-     * 
+     * Removes the player from the game and all their data. 
      * @param name A name that is associated with a player stored in the game
      */
     public void removeUser(String name) {

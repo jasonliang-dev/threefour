@@ -5,8 +5,17 @@
  */
 package threefour;
 
+import java.awt.Choice;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JButton;
+import javax.swing.JTextField;
 
 /**
  *
@@ -18,16 +27,65 @@ public class PlayerSelectionFrame extends javax.swing.JFrame {
     String p1Name = null;
     String p2Name = null;
     
-    public PlayerSelectionFrame() {
+    JButton setNameButton = new JButton("Set Name");
+    JTextField player1Text = new JTextField();;
+    JTextField player2Text = new JTextField();;
+    Choice names1Choice = new Choice();
+    Choice names2Choice = new Choice();
+    
+    public PlayerSelectionFrame() throws IOException {
         initComponents();
         
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int height = screenSize.height;
         int width = screenSize.width;
-        this.setSize(700, 500);
+        this.setSize(400, 400);
+        
+        String currentDirectory = System.getProperty("user.dir");
+        String fullFileName = currentDirectory + "/background.png";
 
+        BufferedImage myImage = ImageIO.read(new File(fullFileName));
+        this.setContentPane(new ContentPanel(myImage));
+        
+        setNameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setNameButtonActionPerformed(evt);
+            }
+        });
+        setNameButton.setBounds(150, 140, 90, 25);
+        
+        player1Text.setBounds(15, 50, 100, 25);
+        player2Text.setBounds(250, 50, 100, 25);
+        player2Text.setEnabled(false);
+        
+        names1Choice.setBounds(120, 58, 20, 15);
+        names1Choice.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                names1ChoiceItemStateChanged(evt);
+            }
+        });
+        
+        names2Choice.setBounds(355, 58, 20, 15);
+        names2Choice.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                names2ChoiceItemStateChanged(evt);
+            }
+        });
+        names2Choice.setEnabled(false);
+        
+        
+        
+        
+        this.add(setNameButton);
+        this.add(player1Text);
+        this.add(player2Text);
+        this.add(names1Choice);
+        this.add(names2Choice);
+        
         // here's the part where i center the jframe on screen
         this.setLocationRelativeTo(null);
+        this.setLayout(null);
+        this.setVisible(true);
     }
 
     /**
@@ -43,7 +101,7 @@ public class PlayerSelectionFrame extends javax.swing.JFrame {
         player1 = new javax.swing.JTextField();
         namesChoice2 = new java.awt.Choice();
         player2 = new javax.swing.JTextField();
-        setNameButton = new javax.swing.JButton();
+        setName = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,10 +115,10 @@ public class PlayerSelectionFrame extends javax.swing.JFrame {
 
         player2.setEnabled(false);
 
-        setNameButton.setText("Set Name");
-        setNameButton.addActionListener(new java.awt.event.ActionListener() {
+        setName.setText("Set Name");
+        setName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                setNameButtonActionPerformed(evt);
+                setNameActionPerformed(evt);
             }
         });
 
@@ -81,7 +139,7 @@ public class PlayerSelectionFrame extends javax.swing.JFrame {
                         .addComponent(namesChoice2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(284, 284, 284)
-                        .addComponent(setNameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(setName, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(206, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -94,16 +152,53 @@ public class PlayerSelectionFrame extends javax.swing.JFrame {
                     .addComponent(player1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(namesChoice1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(73, 73, 73)
-                .addComponent(setNameButton)
+                .addComponent(setName)
                 .addContainerGap(212, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void setNameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setNameButtonActionPerformed
+    
+    private void setNameButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(p1Name == null) {
-            if( ( gameData.addUser(player1.getText()) ) || ( gameData.nameSelected(player1.getText()) ) ) {
+            if( ( gameData.addUser(player1Text.getText()) ) || ( gameData.nameSelected(player1Text.getText()) == 1 ) ) {
+                p1Name = player1Text.getText();
+                gameData.setCurUser(p1Name);
+                
+                names1Choice.setEnabled(false);
+                player1Text.setEnabled(false);
+                names2Choice.setEnabled(true);
+                player2Text.setEnabled(true);
+                
+                try {
+                    names2Choice.remove(p1Name);
+                } catch (Exception e) {
+                    
+                }
+                
+            } else {
+                player1Text.setText("Invalid name");
+            }
+        } else if (p2Name == null) { 
+            if( ( gameData.addUser(player2Text.getText()) ) || ( gameData.nameSelected(player2Text.getText()) == 1) ) {
+                p2Name = player2Text.getText();
+                gameData.setCurUser(p2Name);
+
+                names2Choice.setEnabled(false);
+                player2Text.setEnabled(false);
+                
+                setNameButton.setText("Continue");
+            } else {
+                player2Text.setText("Invalid name");
+            }
+        } else {
+            //CONTINUE TO GAME ROOM
+        }
+    }
+    
+    private void setNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setNameActionPerformed
+        if(p1Name == null) {
+            if( ( gameData.addUser(player1.getText()) ) || ( gameData.nameSelected(player1.getText()) == 1 ) ) {
                 p1Name = player1.getText();
                 gameData.setCurUser(p1Name);
                 
@@ -117,30 +212,39 @@ public class PlayerSelectionFrame extends javax.swing.JFrame {
                 player1.setText("Invalid name");
             }
         } else if (p2Name == null) { 
-            if( ( gameData.addUser(player2.getText()) ) || ( gameData.nameSelected(player1.getText()) ) ) {
+            if( ( gameData.addUser(player2.getText()) ) || ( gameData.nameSelected(player1.getText()) == 1 ) ) {
                 p2Name = player2.getText();
                 gameData.setCurUser(p2Name);
 
                 namesChoice2.setEnabled(false);
                 player2.setEnabled(false);
                 
-                setNameButton.setText("Continue");
+                setName.setText("Continue");
             } else {
                 player2.setText("Invalid name");
             }
         } else {
-            //CONTINUE TO GAME ROOM
+            System.out.println("RUNNING");
+            gameData.exportData();
         }
-    }//GEN-LAST:event_setNameButtonActionPerformed
-
+    }//GEN-LAST:event_setNameActionPerformed
+    
+    private void names1ChoiceItemStateChanged(java.awt.event.ItemEvent evt) {                                              
+        player1Text.setText(names1Choice.getSelectedItem());
+    } 
+    
+    private void names2ChoiceItemStateChanged(java.awt.event.ItemEvent evt) {                                              
+        player2Text.setText(names2Choice.getSelectedItem());
+    }
+    
     private void namesChoice1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_namesChoice1ItemStateChanged
         player1.setText(namesChoice1.getSelectedItem());
     }//GEN-LAST:event_namesChoice1ItemStateChanged
 
     public void updateLists() {
         for(String name : gameData.storedNames) {
-            namesChoice1.add(name);
-            namesChoice2.add(name);
+            names1Choice.add(name);
+            names2Choice.add(name);
         }
     }
     
@@ -174,7 +278,11 @@ public class PlayerSelectionFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PlayerSelectionFrame().setVisible(true);
+                try {
+                    new PlayerSelectionFrame();
+                } catch (IOException ex) {
+                    Logger.getLogger(MainMenuFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -184,6 +292,6 @@ public class PlayerSelectionFrame extends javax.swing.JFrame {
     private java.awt.Choice namesChoice2;
     private javax.swing.JTextField player1;
     private javax.swing.JTextField player2;
-    private javax.swing.JButton setNameButton;
+    private javax.swing.JButton setName;
     // End of variables declaration//GEN-END:variables
 }
