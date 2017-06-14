@@ -1,5 +1,3 @@
 * threefour
 
-#+BEGIN_QUOTE
-TODO: add stuff
-#+END_QUOTE
+[[file:poster.png]]
