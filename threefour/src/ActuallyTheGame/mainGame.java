@@ -1,52 +1,49 @@
-package threefour;
+package ActuallyTheGame;
 
 import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
 import motej.Mote;
 
-public final class mainGame {
+public class mainGame {
 	// there are two players
-	static final int C = 2;
+	final int C = 2;
 
-	static TimerTask clock; // for step method
-	static String status = "IDLE"; // state of the game
-	static String info = ""; // info text
+	GameFrame frame;
 
-	static WiimoteFinder[] wmFinder = new WiimoteFinder[C];
-	static Wiimote[] wiimotes = new Wiimote[C];
+	TimerTask clock; // for step method
+	String status = "IDLE"; // state of the game
+	String info = ""; // info text
 
-	static Player[] players = new Player[C];
+	WiimoteFinder[] wmFinder = new WiimoteFinder[C];
+	Wiimote[] wiimotes = new Wiimote[C];
 
-	static boolean[] playerFlag = {false, false};
-	static int[] playerTime = {0, 0};
-	static String[] playerAngle = {"", ""};
+	Player[] players = new Player[C];
 
-	static DecimalFormat timeFormat = new DecimalFormat("0.000"); // stop the labels from jumping around
-	static DecimalFormat angleFormat = new DecimalFormat("0.0"); // too many decimals. remove them.
+	boolean[] playerFlag = {false, false};
+	int[] playerTime = {0, 0};
+	String[] playerAngle = {"", ""};
+
+	DecimalFormat timeFormat = new DecimalFormat("0.000"); // stop the labels from jumping around
+	DecimalFormat angleFormat = new DecimalFormat("0.0"); // too many decimals. remove them.
 
 
-	static int counter = 0;
-	static int randNum = randNum();
+	int counter = 0;
+	int randNum = randNum();
 
-	private mainGame() {
-		/*
-		  class is final
-		  everything is static
-		  constructor is private
-		  because there should only be one mainGame
-		*/
+	public mainGame(GameFrame f) {
+		frame = f;
 	}
 
 	/**
 	 * create and start a new timer
 	 * the step method will be called every millisecond-ish.
 	 */
-	public static void startTimer() {
-		mainGame.clock = new TimerTask() {
+	public void startTimer() {
+		clock = new TimerTask() {
 			@Override
 			public void run() {
-				mainGame.step();
+				step();
 			}
 		};
 		Timer time = new Timer();
@@ -57,7 +54,7 @@ public final class mainGame {
 	 * Oh man this is huge and big and huge and big and- okay I think you get it.
 	 * this method runs every millisecond(-ish).
 	 */
-	public static void step() {
+	public void step() {
 		// TODO: audio
 
 		switch (status) {
@@ -66,11 +63,11 @@ public final class mainGame {
 
 				for (int k = 0; k < C; k++) {
 					if (playerFlag[k]) {
-						gameStart.setPlayerLabel(k, "OK");
+						frame.setPlayerLabel(k, "OK");
 					}
 					else {
 						ready = false;
-						gameStart.setPlayerLabel(k, "Waiting...");
+						frame.setPlayerLabel(k, "Waiting...");
 
 						Wiimote wm = wiimotes[k];
 						if (wm.getButton().equals("AB")) {
@@ -82,6 +79,7 @@ public final class mainGame {
 				}
 				if (ready) {
 					status = "COUNT";
+					randNum = randNum();
 					resetFlag();
 				}
 				else {
@@ -94,10 +92,10 @@ public final class mainGame {
 				for (int k = 0; k < C; k++) {
 					Wiimote wm = wiimotes[k];
 					if (wm.pointDown()) {
-						gameStart.setPlayerLabel(k, "OK");
+						frame.setPlayerLabel(k, "OK");
 					}
 					else {
-						gameStart.setPlayerLabel(k, "Point the remote down!");
+						frame.setPlayerLabel(k, "Point the remote down!");
 						point = false;
 					}
 				}
@@ -131,7 +129,7 @@ public final class mainGame {
 
 				for (int k = 0; k < C; k++) {
 					double t = playerTime[k] / 1000.0;
-					gameStart.setPlayerLabel(k, timeFormat.format(t));
+					frame.setPlayerLabel(k, timeFormat.format(t));
 
 					if (!playerFlag[k]) {
 						playersFired = false;
@@ -140,6 +138,7 @@ public final class mainGame {
 						Wiimote wm = wiimotes[k];
 						String button = wm.getButton();
 						if (button.equals("B")) {
+							new soundPlayer("gunshot.wav");
 							Mote m = wm.getMote();
 							m.rumble(120l);
 							playerFlag[k] = true;
@@ -183,7 +182,7 @@ public final class mainGame {
 
 				for (int k = 0; k < C; k++) {
 					if (pt[k] == 0) {
-						gameStart.setPlayerLabel(k, "DQ");
+						frame.setPlayerLabel(k, "DQ");
 					}
 				}
 				cont(5, "PITCH");
@@ -192,7 +191,7 @@ public final class mainGame {
 				info = "Angle of shot";
 
 				for (int k = 0; k < C; k++) {
-					gameStart.setPlayerLabel(k, playerAngle[k]);
+					frame.setPlayerLabel(k, playerAngle[k]);
 				}
 				cont(5, "END");
 				break;
@@ -201,43 +200,45 @@ public final class mainGame {
 
 				info = s;
 				for (int k = 0; k < C; k++) {
-					gameStart.setPlayerLabel(k, s);
+					frame.setPlayerLabel(k, s);
 
 					Wiimote wm = wiimotes[k];
 					if (wm.getButton().equals("PLUS")) {
 						status = "IDLE";
+					}
+					else if (wm.getButton().equals("MINUS")) {
+						// TODO: go back to main menu
 					}
 				}
 				break;
 			default:
 				break;
 		}
-		gameStart.setInfoLabel(info);
+		frame.setInfoLabel(info);
 	}
 
 	/**
 	 * Adds a new Wii Remote.
 	 * @param slot player slot
 	 */
-	public static void addWiimote(int slot) {
+	public void addWiimote(int slot) {
 		wmFinder[slot] = new WiimoteFinder();
 		Mote m = wmFinder[slot].findMote();
 
 		boolean[] playerLeds = {false, false, false, false};
 		playerLeds[slot] = true;
 		m.setPlayerLeds(playerLeds);
-		m.rumble(3000l);
 
 		Wiimote wm = new Wiimote(m);
 		wiimotes[slot] = wm;
 	}
 
 	/**
-	 * Contine to next state.
+	 * Continue to next state.
 	 * @param seconds the number of seconds to wait before continuing.
 	 * @param s name of status.
 	 */
-	public static void cont(int seconds, String s) {
+	public void cont(int seconds, String s) {
 		counter++;
 		if (counter == seconds * 1000) {
 			counter = 0;
@@ -248,7 +249,7 @@ public final class mainGame {
 	/**
 	 * Sets all indexes of playerFlag to false.
 	 */
-	public static void resetFlag() {
+	public void resetFlag() {
 		for (int k = 0; k < C; k++) {
 			playerFlag[k] = false;
 		}
@@ -258,7 +259,7 @@ public final class mainGame {
 	 * Get a random number.
 	 * @return a number between 2000 to 5000 (I think)
 	 */
-	public static int randNum() {
+	public int randNum() {
 		return (int)(Math.random() * 3000) + 2000;
 	}
 
@@ -266,7 +267,7 @@ public final class mainGame {
 	 * Get the time for each player
 	 * @return time it took to shoot if round is over
 	 */
-	public static int[] getTime() {
+	public int[] getTime() {
 		if (status.equals("END")) {
 			return playerTime;
 		}

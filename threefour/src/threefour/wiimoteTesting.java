@@ -1,5 +1,7 @@
 package threefour;
 
+import ActuallyTheGame.WiimoteFinder;
+import ActuallyTheGame.Wiimote;
 import java.util.Arrays;
 import motej.Mote;
 

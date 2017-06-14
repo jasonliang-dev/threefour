@@ -1,12 +1,14 @@
 package threefour;
 
+import ActuallyTheGame.mainGame;
+
 /**
  *
  * @author jason
  */
 public class gameStart extends javax.swing.JFrame {
 
-	int moteNum = mainGame.C;
+	int moteNum = 2;
 
 	/**
 	 * Creates new form gameStart

@@ -1,4 +1,4 @@
-package threefour;
+package ActuallyTheGame;
 
 import motej.Mote;
 import motej.event.AccelerometerEvent;
@@ -42,6 +42,7 @@ public class Wiimote {
 				else if (evt.isButtonAPressed()) button = "A";
 				else if (evt.isButtonBPressed()) button = "B";
 				else if (evt.isButtonPlusPressed()) button = "PLUS";
+				else if (evt.isButtonMinusPressed()) button = "MINUS";
 				else if (evt.isNoButtonPressed()) button = "NONE";
 			}
 		};
