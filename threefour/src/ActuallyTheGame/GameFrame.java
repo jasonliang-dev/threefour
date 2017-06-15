@@ -32,12 +32,12 @@ public class GameFrame extends MainFrame {
 
         player1Label.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         player1Label.setText("P1");
-        player1Label.setBounds(20, (genYPos*2)-80, 50, 50);
+        player1Label.setBounds(20, (genYPos*2)-80, 300, 50);
 
         player2Label.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         player2Label.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         player2Label.setText("P2");
-        player2Label.setBounds((genXPos*2)- 70, (genYPos*2)-80, 50, 50);
+        player2Label.setBounds((genXPos*2)- 320, (genYPos*2)-80, 300, 50);
         
         connectButton.setBounds(20, 75, 85, 25);
         connectButton.addActionListener(new java.awt.event.ActionListener() {
@@ -55,15 +55,15 @@ public class GameFrame extends MainFrame {
     }
     
     private void connectButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
-            connectButton.setVisible(false);
+            /*connectButton.setVisible(false);
             for (int k = 0; k < 2; k++) {
                     mainGame.addWiimote(k);
             }
-            mainGame.startTimer();
+            mainGame.startTimer();*/
     } 
     
-    public void setPlayerLabel(int slot, String s) {
-            javax.swing.JLabel label;
+    //public void setPlayerLabel(int slot, String s) {
+            /*javax.swing.JLabel label;
             switch (slot) {
                     case 0:
                             label = player1Label;
@@ -74,8 +74,8 @@ public class GameFrame extends MainFrame {
                     default:
                             return;
             }
-            label.setText(s);
-    }
+            label.setText(s);*/
+    //}
     
     public void updateFrame() {
         
