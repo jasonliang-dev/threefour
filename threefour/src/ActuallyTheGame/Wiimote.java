@@ -66,8 +66,7 @@ public class Wiimote {
 	 */
 	public boolean pointDown() {
 		int[] axes = getMotion();
-		double ang = Math.abs(getPitch());
-		return (Math.PI / 4) < ang && ang < (Math.PI / 2) && axes[1] > axes[2];
+		return (Math.PI / 6) < Math.abs(getPitch()) && axes[1] > axes[2];
 	}
 
 	/**

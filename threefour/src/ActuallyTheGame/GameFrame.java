@@ -24,20 +24,21 @@ public class GameFrame extends MainFrame {
 		//Represents general the x and y coordinates for all components
 		int genYPos = (frameHeight / 2);
 		int genXPos = (frameWidth / 2);
+		int boty = (genYPos*2) - 80;
 		
 		infoLabel.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
 		infoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		infoLabel.setText("Please connect the Wiimotes");
-		infoLabel.setBounds(genXPos-298, 25, 596, 50);
+		infoLabel.setBounds(0, 25, frameWidth, 50);
 		
 		player1Label.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
 		player1Label.setText("P1");
-		player1Label.setBounds(20, (genYPos*2)-80, 50, 50);
+		player1Label.setBounds(20, boty, 298, 50);
 		
 		player2Label.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
 		player2Label.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
 		player2Label.setText("P2");
-		player2Label.setBounds((genXPos*2)- 70, (genYPos*2)-80, 50, 50);
+		player2Label.setBounds((genXPos*2)-298-20, boty, 298, 50);
 		
 		connectButton.setBounds(20, 75, 85, 25);
 		connectButton.addActionListener(new java.awt.event.ActionListener() {

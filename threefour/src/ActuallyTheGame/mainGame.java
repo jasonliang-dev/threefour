@@ -185,7 +185,7 @@ public class mainGame {
 						frame.setPlayerLabel(k, "DQ");
 					}
 				}
-				cont(5, "PITCH");
+				cont(4, "PITCH");
 				break;
 			case "PITCH": // display pitch
 				info = "Angle of shot";
@@ -193,7 +193,7 @@ public class mainGame {
 				for (int k = 0; k < C; k++) {
 					frame.setPlayerLabel(k, playerAngle[k]);
 				}
-				cont(5, "END");
+				cont(3, "END");
 				break;
 			case "END": // endgame
 				String s = "Press  +  to start a new game!";
