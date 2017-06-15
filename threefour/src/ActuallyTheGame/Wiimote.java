@@ -1,4 +1,4 @@
-package threefour;
+package ActuallyTheGame;
 
 import motej.Mote;
 import motej.event.AccelerometerEvent;
@@ -42,6 +42,7 @@ public class Wiimote {
 				else if (evt.isButtonAPressed()) button = "A";
 				else if (evt.isButtonBPressed()) button = "B";
 				else if (evt.isButtonPlusPressed()) button = "PLUS";
+				else if (evt.isButtonMinusPressed()) button = "MINUS";
 				else if (evt.isNoButtonPressed()) button = "NONE";
 			}
 		};
@@ -65,8 +66,7 @@ public class Wiimote {
 	 */
 	public boolean pointDown() {
 		int[] axes = getMotion();
-		double ang = Math.abs(getPitch());
-		return (Math.PI / 4) < ang && ang < (Math.PI / 2) && axes[1] > axes[2];
+		return (Math.PI / 6) < Math.abs(getPitch()) && axes[1] > axes[2];
 	}
 
 	/**

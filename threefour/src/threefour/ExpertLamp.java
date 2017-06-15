@@ -1,5 +1,7 @@
 package threefour;
 
+import ActuallyTheGame.mainGame;
+
 public class ExpertLamp {
 	
 	public static void main(String[] args) {

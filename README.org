@@ -1,3 +1,21 @@
-* threefour
-
 [[file:poster.png]]
+
+** Requirements
+Java lol
+
+*** Libraries
+- [[http://www.bluecove.org/][BlueCove]]
+- [[http://motej.sourceforge.net/][motej]]
+- [[https://www.slf4j.org/][slf4j]]
+
+*** Bluetooth packages
+
+**** Debian/Ubuntu
+=apt install libbluetooth-dev=
+
+**** Fedora/RHEL
+=yum install bluez-libs-devel=
+
+**** Arch
+=pacman -S bluez=
+
