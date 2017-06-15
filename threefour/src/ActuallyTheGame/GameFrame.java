@@ -3,6 +3,7 @@ package ActuallyTheGame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import material.MaterialButton;
 
 public class GameFrame extends MainFrame {
 	//add variable to keep track of state of game
@@ -13,7 +14,7 @@ public class GameFrame extends MainFrame {
 	JLabel infoLabel = new JLabel("Please connect the Wiimotes");
 	JLabel player1Label = new JLabel("P1");
 	JLabel player2Label = new JLabel("P2");
-	JButton connectButton = new JButton("Connect");
+	JButton connectButton = new MaterialButton("Connect");
 	
 	public GameFrame() {
 		setup("background_blank.png");
@@ -21,26 +22,36 @@ public class GameFrame extends MainFrame {
 	}
 	
 	public void addComponents() {
+		// set text colour
+		java.awt.Color textColour = new java.awt.Color(33, 33, 33);
 		//Represents general the x and y coordinates for all components
 		int genYPos = (frameHeight / 2);
 		int genXPos = (frameWidth / 2);
-		int boty = (genYPos*2) - 80;
-		
-		infoLabel.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+		int pad = 30; //padding
+		int plw = 400; // stands for player label width (makes sense right?)
+		int plh = 80; // you can guess this one
+		int bot = frameHeight - plh - pad; // bottom of frame
+
+		infoLabel.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+		infoLabel.setForeground(textColour);
 		infoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		infoLabel.setText("Please connect the Wiimotes");
-		infoLabel.setBounds(0, 25, frameWidth, 50);
+		infoLabel.setBounds(0, 50, frameWidth, 80);
 		
-		player1Label.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+		player1Label.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+		player1Label.setForeground(textColour);
 		player1Label.setText("P1");
-		player1Label.setBounds(20, boty, 298, 50);
+		player1Label.setBounds(pad, bot, plw, plh);
 		
-		player2Label.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+		player2Label.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+		player2Label.setForeground(textColour);
 		player2Label.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
 		player2Label.setText("P2");
-		player2Label.setBounds((genXPos*2)-298-20, boty, 298, 50);
+		player2Label.setBounds(frameWidth - plw - pad, bot, plw, plh);
 		
-		connectButton.setBounds(20, 75, 85, 25);
+		int buttonWidth = 120;
+		int buttonHeight = 40;
+		connectButton.setBounds(genXPos - (buttonWidth/2), genYPos - (buttonHeight/2), buttonWidth, buttonHeight);
 		connectButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				connectButtonActionPerformed(evt);
@@ -88,14 +99,11 @@ public class GameFrame extends MainFrame {
 	
 	//REMOVE WHEN GAME IS FINISHED
 	public static void main(String args[]) {
-		/* Set the Nimbus look and feel */
+		/* Set the GTK look and feel */
 		//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-		/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-		* For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-		*/
 		try {
 			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
+				if ("GTK+".equals(info.getName())) {
 					javax.swing.UIManager.setLookAndFeel(info.getClassName());
 					break;
 				}

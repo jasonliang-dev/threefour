@@ -148,7 +148,6 @@ public class mainGame {
 							if (!wm.pointAway()) {
 								playersFired = true;
 								playerTime[k] = 0;
-								break;
 							}
 						}
 					}
@@ -196,11 +195,10 @@ public class mainGame {
 				cont(3, "END");
 				break;
 			case "END": // endgame
-				String s = "Press  +  to start a new game!";
+				info = "Press  +  to start a new game!";
 
-				info = s;
 				for (int k = 0; k < C; k++) {
-					frame.setPlayerLabel(k, s);
+					frame.setPlayerLabel(k, "");
 
 					Wiimote wm = wiimotes[k];
 					if (wm.getButton().equals("PLUS")) {
