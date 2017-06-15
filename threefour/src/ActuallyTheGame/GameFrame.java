@@ -3,7 +3,6 @@ package ActuallyTheGame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import threefour.mainGame;
 
 public class GameFrame extends MainFrame {
     //add variable to keep track of state of game
@@ -15,28 +14,26 @@ public class GameFrame extends MainFrame {
     JLabel player2Label = new JLabel("P2");
     JButton connectButton = new JButton("Connect");
     
+    //Represents general the x and y coordinates for all components
+    int genYPos = (frameHeight / 2);
+    int genXPos = (frameWidth / 2);
+    
     public GameFrame() {
         setup("background_blank.png");
         updateFrame();
+        gameData.importData();
     }
     
     public void addComponents() {
-        //Represents general the x and y coordinates for all components
-        int genYPos = (frameHeight / 2);
-        int genXPos = (frameWidth / 2);
-        
         infoLabel.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         infoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        infoLabel.setText("Please connect the Wiimotes");
-        infoLabel.setBounds(genXPos-298, 25, 596, 50);
+        infoLabel.setBounds(genXPos-((infoLabel.getText().length())*28)/2, 25, (infoLabel.getText().length())*28, 50);
 
         player1Label.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        player1Label.setText("P1");
         player1Label.setBounds(20, (genYPos*2)-80, 300, 50);
 
         player2Label.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         player2Label.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        player2Label.setText("P2");
         player2Label.setBounds((genXPos*2)- 320, (genYPos*2)-80, 300, 50);
         
         connectButton.setBounds(20, 75, 85, 25);
@@ -54,7 +51,7 @@ public class GameFrame extends MainFrame {
         curPanel.add(connectButton);
     }
     
-    private void connectButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
+    private void connectButtonActionPerformed(java.awt.event.ActionEvent evt) {
             /*connectButton.setVisible(false);
             for (int k = 0; k < 2; k++) {
                     mainGame.addWiimote(k);
@@ -78,7 +75,7 @@ public class GameFrame extends MainFrame {
     //}
     
     public void updateFrame() {
-        
+        infoLabel.setBounds(genXPos-((infoLabel.getText().length())*30)/2, 25, (infoLabel.getText().length())*30, 50);
     }
     
     //REMOVE WHEN GAME IS FINISHED
