@@ -200,7 +200,7 @@ public class mainGame {
 				cont(3, "END");
 				break;
 			case "END": // endgame
-				info = "Press  +  to start a new game or - to go to main menu!";
+				info = "Press + to play again - to go to main menu!";
 
 				for (int k = 0; k < C; k++) {
 					frame.setPlayerLabel(k, "");

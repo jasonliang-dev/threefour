@@ -28,7 +28,7 @@ public class GameFrame extends MainFrame {
 		int plh = 80; // you can guess this one
 		int bot = frameHeight - plh - pad; // bottom of frame
 
-		infoLabel.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+		infoLabel.setFont(new java.awt.Font("Dialog", 1, 40)); // NOI18N
 		infoLabel.setForeground(textColour);
 		infoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		infoLabel.setText("Please connect the Wiimotes");
@@ -88,6 +88,7 @@ public class GameFrame extends MainFrame {
 	}
         
         public void restartGame() {
+            gameData.clearCurUsers();
             mainMenuFrame.setVisible(true);
             this.dispose();
         }

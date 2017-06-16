@@ -113,6 +113,12 @@ public class UsersData {
         }
     }
     
+    public void clearCurUsers() {
+        for (int i = 0; i <  selectedPlayers.size(); i++) {
+            selectedPlayers.remove(i);
+        }
+    }
+    
     /**
      * 
      * @return 

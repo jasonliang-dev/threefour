@@ -84,10 +84,11 @@ public class PlayersSelectFrame extends MainFrame {
 
                 names1Choice.setEnabled(false);
                 player1Text.setEnabled(false);
+                player2Text.requestFocus();
                 names2Choice.setEnabled(true);
                 player2Text.setEnabled(true);
                 p1Label.setText("Player 1");
-
+                
                 try {
                     names2Choice.remove(p1Name);
                 } catch (Exception e) {
