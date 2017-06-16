@@ -11,7 +11,7 @@ public class mainGame {
 	final int C = 2;
 
 	GameFrame frame;
-        UsersData gameData;
+        UsersData gameData = MainFrame.gameData;
 
 	TimerTask clock; // for step method
 	String status = "IDLE"; // state of the game
@@ -20,9 +20,9 @@ public class mainGame {
 	WiimoteFinder[] wmFinder = new WiimoteFinder[C];
 	Wiimote[] wiimotes = new Wiimote[C];
 
-        ArrayList<Player> players = gameData.selectedPlayers;
-        String p1Name = players.get(0).getName();
-        String p2Name = players.get(1).getName();
+        ArrayList<Player> selectedPlayers = gameData.selectedPlayers;
+        String p1Name = selectedPlayers.get(0).getName();
+        String p2Name = selectedPlayers.get(1).getName();
 
 	boolean[] playerFlag = {false, false};
 	int[] playerTime = {0, 0};
@@ -35,11 +35,10 @@ public class mainGame {
 	int counter = 0;
 	int randNum = randNum();
 
-	public mainGame(GameFrame f, UsersData gameData) {
+	public mainGame(GameFrame f) {
 		frame = f;
-                this.gameData = gameData;
-	}
-
+	}   
+        
 	/**
 	 * create and start a new timer
 	 * the step method will be called every millisecond-ish.
@@ -283,7 +282,7 @@ public class mainGame {
         * Records the reaction times of each player 
         */
         public void recordTimes() {
-            players.get(0).addTime(playerTime[0]);
-            players.get(1).addTime(playerTime[1]);
+            //selectedPlayers.get(0).addTime(playerTime[0]);
+            //selectedPlayers.get(1).addTime(playerTime[1]);
         }
 }

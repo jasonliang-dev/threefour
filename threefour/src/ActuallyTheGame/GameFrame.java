@@ -6,15 +6,15 @@ import javax.swing.JPanel;
 import material.MaterialButton;
 
 public class GameFrame extends MainFrame {
-	mainGame G = new mainGame(this, gameData);
+	public mainGame G = new mainGame(this);;
 	
-	JLabel infoLabel = new JLabel("Please connect the Wiimotes");
-	JLabel player1Label = new JLabel("P1");
-	JLabel player2Label = new JLabel("P2");
+	JLabel infoLabel = new JLabel();
+	JLabel player1Label = new JLabel();	
+        JLabel player2Label = new JLabel();
 	JButton connectButton = new MaterialButton("Connect");
 	
 	public GameFrame() {
-		setup("background_blank.png");
+            setup("background_blank.png");
 	}
 	
 	public void addComponents() {
@@ -36,13 +36,13 @@ public class GameFrame extends MainFrame {
 		
 		player1Label.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
 		player1Label.setForeground(textColour);
-		player1Label.setText("P1");
+		player1Label.setText("P1: "+G.p1Name);
 		player1Label.setBounds(pad, bot, plw, plh);
 		
 		player2Label.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
 		player2Label.setForeground(textColour);
 		player2Label.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-		player2Label.setText("P2");
+		player2Label.setText("P2: "+ G.p2Name);
 		player2Label.setBounds(frameWidth - plw - pad, bot, plw, plh);
 		
 		int buttonWidth = 120;
@@ -59,7 +59,7 @@ public class GameFrame extends MainFrame {
 		curPanel.add(player2Label);
 		curPanel.add(connectButton);
 	}
-	
+            
 	private void connectButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		connectButton.setVisible(false);
 		for (int k = 0; k < 2; k++) {
