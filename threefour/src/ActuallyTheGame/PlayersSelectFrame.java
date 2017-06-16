@@ -29,10 +29,11 @@ public class PlayersSelectFrame extends MainFrame {
 
     public void addComponents() {
         //Represents general the x and y coordinates for all components
-        int genYPos = (frameHeight / 2)-40;
+        int genYPos = (frameHeight / 2)-30;
         int genXPos = (frameWidth / 2);
 
-        setNameButton.setBounds(genXPos - 45, genYPos + 50, 90, 25);
+        setNameButton.setBounds(genXPos - 75, genYPos + 30, 150, 25);
+        setNameButton.setFont(new Font("SansSerif", Font.BOLD, 16));
         setNameButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 setNameButtonActionPerformed(evt);
@@ -46,7 +47,7 @@ public class PlayersSelectFrame extends MainFrame {
             }
         });
 
-        names2Choice.setBounds(genXPos+270,genYPos-95, 20, 15);
+        names2Choice.setBounds(genXPos+370,genYPos-95, 20, 15);
         names2Choice.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 names2ChoiceItemStateChanged(evt);
@@ -54,15 +55,15 @@ public class PlayersSelectFrame extends MainFrame {
         });
         names2Choice.setEnabled(false);
         
-        player1Text.setBounds(genXPos-265, genYPos - 100, 150, 25);
-        player2Text.setBounds(genXPos+115, genYPos-100, 150, 25);
+        player1Text.setBounds(genXPos-365, genYPos - 100, 250, 25);
+        player2Text.setBounds(genXPos+115, genYPos-100, 250, 25);
         
-        p1Label.setBounds(genXPos-265, genYPos - 125, 150, 25);
+        p1Label.setBounds(genXPos-365, genYPos - 125, 250, 25);
         p1Label.setForeground(Color.WHITE);
-        p1Label.setFont(new Font("SansSerif", Font.BOLD, 12));
-        p2Label.setBounds(genXPos+115, genYPos-125, 150, 25);
+        p1Label.setFont(new Font("SansSerif", Font.BOLD, 18));
+        p2Label.setBounds(genXPos+115, genYPos-125, 250, 25);
         p2Label.setForeground(Color.WHITE);
-        p1Label.setFont(new Font("SansSerif", Font.BOLD, 12));
+        p2Label.setFont(new Font("SansSerif", Font.BOLD, 18));
         
         player2Text.setEnabled(false);
 
@@ -77,7 +78,7 @@ public class PlayersSelectFrame extends MainFrame {
 
     private void setNameButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if (p1Name == null) {
-            if ((gameData.addUser(player1Text.getText())) || (gameData.nameSelected(player2Text.getText()) < 1)) {
+            if ((gameData.addUser(player1Text.getText())) || (gameData.nameSelected(player1Text.getText()) < 0)) {
                 p1Name = player1Text.getText();
                 gameData.setCurUser(p1Name);
 
@@ -85,6 +86,7 @@ public class PlayersSelectFrame extends MainFrame {
                 player1Text.setEnabled(false);
                 names2Choice.setEnabled(true);
                 player2Text.setEnabled(true);
+                p1Label.setText("Player 1");
 
                 try {
                     names2Choice.remove(p1Name);
@@ -93,24 +95,28 @@ public class PlayersSelectFrame extends MainFrame {
                 }
 
             } else {
-                player1Text.setText("Invalid name");
+                if (gameData.nameSelected(player1Text.getText()) > 0)
+                    p1Label.setText("Player 1: Name is used");
+                else 
+                    p1Label.setText("Player 1: Invalid name");
             }
         } else if (p2Name == null) {
-            if ((gameData.addUser(player2Text.getText())) || (gameData.nameSelected(player2Text.getText()) < 1)) {
+            if ((gameData.addUser(player2Text.getText())) || (gameData.nameSelected(player2Text.getText()) < 0)) {
                 p2Name = player2Text.getText();
                 gameData.setCurUser(p2Name);
 
                 names2Choice.setEnabled(false);
                 player2Text.setEnabled(false);
+                p2Label.setText("Player 2");
 
-                setNameButton.setText("Continue");
                 GameFrame game = new GameFrame();
                 this.dispose();
             } else {
-                player2Text.setText("Invalid name");
+                if (gameData.nameSelected(player2Text.getText()) > 0)
+                    p2Label.setText("Player 2: Name is used");
+                else 
+                    p2Label.setText("Player 2: Invalid name");
             }
-        } else {
-
         }
     }
 
