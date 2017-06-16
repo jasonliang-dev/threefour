@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import material.MaterialButton;
 
 public class GameFrame extends MainFrame {
-	public mainGame G = new mainGame(this);;
+	mainGame G = new mainGame(this);;
 	
 	JLabel infoLabel = new JLabel();
 	JLabel player1Label = new JLabel();	

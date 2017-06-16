@@ -282,7 +282,7 @@ public class mainGame {
         * Records the reaction times of each player 
         */
         public void recordTimes() {
-            //selectedPlayers.get(0).addTime(playerTime[0]);
-            //selectedPlayers.get(1).addTime(playerTime[1]);
+            selectedPlayers.get(0).addTime(playerTime[0]);
+            selectedPlayers.get(1).addTime(playerTime[1]);
         }
 }
