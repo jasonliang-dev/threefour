@@ -14,7 +14,7 @@ Java lol
 =apt install libbluetooth-dev=
 
 **** Fedora/RHEL
-=yum install bluez-libs-devel=
+=dnf install bluez-libs-devel=
 
 **** Arch
 =pacman -S bluez=
